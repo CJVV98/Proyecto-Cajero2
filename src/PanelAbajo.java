@@ -323,7 +323,7 @@ public class PanelAbajo extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			salir();
 	}});
-	
+// Botones de teclado
 	boton1.addActionListener (new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 		try {

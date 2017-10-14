@@ -43,7 +43,7 @@ import java.util.TreeMap;
 
 public class PanelDerecho extends JPanel {
 	
-	  static JButton registrar,registrar1,registrar2,registrar11,registrar22,registrar12;
+	  static JButton retiroef,consultarsa,transferencias,registrar11,registrar22,registrar12;
 	  public PanelDerecho() {
 		  
 		  	Border borde = BorderFactory.createTitledBorder( "" );

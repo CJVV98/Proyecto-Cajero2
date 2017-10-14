@@ -10,7 +10,7 @@ import javax.swing.border.Border;
 
 
 public class PanelIzquierdo extends JPanel {
-	static JButton registrar3,registrar4,registrar11,registrar22,registrar12;
+	static JButton pagos,cambiocl,registrar11,registrar22,registrar12;
 	int dato;
 	int a=0;
 	public PanelIzquierdo(){

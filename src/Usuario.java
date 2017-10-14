@@ -36,7 +36,7 @@ static String nombresuser;
 	private Usuario iniciar() {
 		JFrame frame=new JFrame();
 		
-		Dimension dims = new Dimension(540, 300);
+		Dimension dims = new Dimension(590, 300);
 		this.setSize(dims);
 		this.setPreferredSize(dims);
 		this.getContentPane().setLayout(null); 
@@ -61,7 +61,7 @@ static String nombresuser;
 		
 		ImageIcon imagen = new ImageIcon( "images/usuarios.png");		
 		JLabel foto = new JLabel(imagen);
-		foto.setBounds(400,20, 100, 123);
+		foto.setBounds(450,20, 100, 123);
 		contentPane.add(foto);
 		
 		
@@ -72,46 +72,46 @@ static String nombresuser;
 	
 		JTextField cedula = new JTextField();
 		cedula .setText("");
-		cedula .setBounds(100, 65,290, 20);
+		cedula .setBounds(120, 65,290, 20);
 		contentPane.add(cedula);
 		
 		
 		JLabel etiqueta = new JLabel("NOMBRE: ");
 		etiqueta.setForeground(Color.black);
-		etiqueta.setBounds(10, 79, 50, 50);
+		etiqueta.setBounds(10, 79, 90, 50);
 		contentPane.add(etiqueta);
 	
 		JTextField cajadetexto = new JTextField();
 		cajadetexto.setText("");
-		cajadetexto.setBounds(100,95,290, 20);
+		cajadetexto.setBounds(120,95,290, 20);
 		contentPane.add(cajadetexto);
 		
 		JLabel etiqueta1 = new JLabel("APELLIDO: ");
 		etiqueta1.setForeground(Color.black);
-		etiqueta1.setBounds(10, 105, 60, 60);
+		etiqueta1.setBounds(10, 105, 90, 60);
 		contentPane.add(etiqueta1);
 				
 		JTextField cajadetexto1 = new JTextField();
-		cajadetexto1.setBounds(100, 125,290, 20);
+		cajadetexto1.setBounds(120, 125,290, 20);
 		contentPane.add(cajadetexto1);
 		
 		JLabel saldo = new JLabel("SUELDO: ");
 		saldo.setForeground(Color.black);
-		saldo.setBounds(10, 145, 50, 50);
+		saldo.setBounds(10, 145, 90, 50);
 		contentPane.add(saldo);
 	
 		JTextField saldo1 = new JTextField();
 		saldo1.setText("");
-		saldo1.setBounds(100, 165,290, 20);
+		saldo1.setBounds(120, 165,290, 20);
 		contentPane.add(saldo1);
 		
 		JLabel clave = new JLabel("CLAVE: ");
 		clave.setForeground(Color.black);
-		clave.setBounds(10, 170, 60, 60);
+		clave.setBounds(10, 170, 90, 60);
 		contentPane.add(clave );
 				
 		JTextField clave1 = new JTextField();
-		clave1.setBounds(100, 195,290, 20);
+		clave1.setBounds(120, 195,290, 20);
 		contentPane.add(clave1);
                 
         JButton boton21 = new JButton("ACEPTAR");

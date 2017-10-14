@@ -65,7 +65,7 @@ static String nombresuser;
 		contentPane.add(foto);
 		
 		
-		JLabel etiqueta5 = new JLabel("N DE CEDULA");
+		JLabel etiqueta5 = new JLabel("N° DE CEDULA: ");
 		etiqueta5.setForeground(Color.black);
 		etiqueta5.setBounds(10, 45, 100, 50);
 		contentPane.add(etiqueta5);
@@ -76,7 +76,7 @@ static String nombresuser;
 		contentPane.add(cedula);
 		
 		
-		JLabel etiqueta = new JLabel("NOMBRE");
+		JLabel etiqueta = new JLabel("NOMBRE: ");
 		etiqueta.setForeground(Color.black);
 		etiqueta.setBounds(10, 79, 50, 50);
 		contentPane.add(etiqueta);
@@ -86,7 +86,7 @@ static String nombresuser;
 		cajadetexto.setBounds(100,95,290, 20);
 		contentPane.add(cajadetexto);
 		
-		JLabel etiqueta1 = new JLabel("APELLIDO");
+		JLabel etiqueta1 = new JLabel("APELLIDO: ");
 		etiqueta1.setForeground(Color.black);
 		etiqueta1.setBounds(10, 105, 60, 60);
 		contentPane.add(etiqueta1);
@@ -95,7 +95,7 @@ static String nombresuser;
 		cajadetexto1.setBounds(100, 125,290, 20);
 		contentPane.add(cajadetexto1);
 		
-		JLabel saldo = new JLabel("SUELDO");
+		JLabel saldo = new JLabel("SUELDO: ");
 		saldo.setForeground(Color.black);
 		saldo.setBounds(10, 145, 50, 50);
 		contentPane.add(saldo);
@@ -105,7 +105,7 @@ static String nombresuser;
 		saldo1.setBounds(100, 165,290, 20);
 		contentPane.add(saldo1);
 		
-		JLabel clave = new JLabel("CLAVE");
+		JLabel clave = new JLabel("CLAVE: ");
 		clave.setForeground(Color.black);
 		clave.setBounds(10, 170, 60, 60);
 		contentPane.add(clave );

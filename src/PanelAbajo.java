@@ -6,6 +6,9 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -13,9 +16,10 @@ import javax.swing.border.TitledBorder;
 
 
 public class PanelAbajo extends JPanel {
-	    
-
-    static JButton btnOpcion1,registrar2,boton1,boton2,boton3,boton4,boton5,boton6,boton7,boton8,boton9,boton02,continuar,salir,cancelar,continuar1;
+	 
+	static boolean val;
+	static Usuario usuario;
+    static JButton btnOpcion1,registrar2,registrar16,boton1,boton2,boton3,boton4,boton5,boton6,boton7,boton8,boton9,boton02,continuar,salir,cancelar,continuar1;
     static JLabel etiqueta52,saldo1;
 	static int bandera=0,cedula,valor,claveerronea=0;
 	static JTextField cajadetexto;
@@ -23,8 +27,10 @@ public class PanelAbajo extends JPanel {
 	static JTextField clave1,clave4;
 	static String clavevalidar="", clavevalidar1="";
 	static int b=0,i,a=1;
+	static String[] pag = {"Agua","Luz","Gas","Telefono","Internet"};;
+	static String[] trans = {"10.000","20.000","50.000","100.000","200.000","500.000"};
 	
-	public PanelAbajo( ) {
+	public PanelAbajo() {
 	
 	Border borde = BorderFactory.createTitledBorder( "" );
     setBorder( borde );
@@ -280,7 +286,7 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 8;
 	add(etiqueta14, contenido);
 	
-	JButton registrar16 = new JButton();
+	registrar16 = new JButton();
 	registrar16.setBackground(Color.ORANGE);
 	registrar16.setText("AGREGAR USUARIO");
 	registrar16.setAlignmentX(LEFT_ALIGNMENT);
@@ -304,116 +310,210 @@ public class PanelAbajo extends JPanel {
 	
 	registrar2.addActionListener (new ActionListener(){
 		public void actionPerformed(ActionEvent e){		
-			ingresar();
-		}
-
-	});
-			registrar16.addActionListener (new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					Usuario usuario = new Usuario("USUARIO");
-				
-			
-				
-		}}
-
-			);
-		cancelar.addActionListener (new ActionListener(){
-				public void actionPerformed(ActionEvent e){			
-					ingresar();
-				
-			
-				
-		}}
-
-			);
-			
-		boton1.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-			
-				clavevalidar=clavevalidar+"1";
-				clave1.setText(clavevalidar);
-				
-
+			ingresar(2);
 	}});
-		boton2.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				clavevalidar=clavevalidar+"2";
-				clave1.setText(clavevalidar);
-			}
-	});
-		boton3.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				clavevalidar=clavevalidar+"3";
-				clave1.setText(clavevalidar);
-			}
-	});
-		boton4.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				clavevalidar=clavevalidar+"4";
-				clave1.setText(clavevalidar);
-			}
-	});
-		boton5.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				clavevalidar=clavevalidar+"5";
-				clave1.setText(clavevalidar);
-			}
-	});
-		boton6.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				clavevalidar=clavevalidar+"6";
-				clave1.setText(clavevalidar);
-			}
-	});
-		boton7.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				clavevalidar=clavevalidar+"7";
-				clave1.setText(clavevalidar);
-			}
-	});
-		boton8.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				clavevalidar=clavevalidar+"8";
-				clave1.setText(clavevalidar);
-			}
-	});
-		boton9.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				clavevalidar=clavevalidar+"9";
-				clave1.setText(clavevalidar);
-			}
-	});
-		boton02.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				clavevalidar=clavevalidar+"0";
-				clave1.setText(clavevalidar);
-			}
-	});
-		
+	registrar16.addActionListener (new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+			usuario = new Usuario("USUARIO");
+	}});
+	cancelar.addActionListener (new ActionListener(){
+		public void actionPerformed(ActionEvent e){			
+			ingresar(1);
+	}});
+	salir.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			salir();
+	}});
 	
 }
 	
-	public static void ingresar() {
-		try {
-			etiqueta52.setText("BIENVENIDO");
-			
-			for(int i=0;i<Usuario.lista.size();i++) {
-				try {
+	public static void salir() {
+		etiqueta52.setText(".");
+		VentanaJFrame.panelCentro.removeAll();
+		VentanaJFrame.panelCentro.repaint();
+		VentanaJFrame.panelBusqueda.removeAll();
+		VentanaJFrame.panelBusqueda.repaint();
+		VentanaJFrame.panelFormulario.removeAll();
+		VentanaJFrame.panelFormulario.repaint();
+		registrar2.setEnabled(false);
+		JLabel etiqueta = new JLabel(" BIENVENIDO A CAJERO UDEC ");
+		etiqueta.setForeground(Color.BLACK);
+		etiqueta.setFont(new java.awt.Font("Tahoma", 1, 19));
+		contenido.fill = GridBagConstraints.HORIZONTAL;
+		contenido.weightx = 0.03;
+		contenido.weighty = 0.03;
+		contenido.gridx = 1;
+		contenido.gridy = 0;
+		VentanaJFrame.panelCentro.add(etiqueta, contenido);
+		
+		ImageIcon imagen = new ImageIcon( "images/tarjeta.png");		
+		JLabel foto = new JLabel(imagen);
+		contenido.fill = GridBagConstraints.HORIZONTAL;
+		contenido.weightx = 0.03;
+		contenido.weighty = 0.03;
+		contenido.gridx = 0;
+		contenido.gridy = 0;
+		VentanaJFrame.panelCentro.add(foto, contenido);
+		
+		JLabel etiqueta45 = new JLabel(" INSERTE SU TARJETA ");
+		etiqueta45.setForeground(Color.BLACK);
+		etiqueta45.setFont(new java.awt.Font("Tahoma", 1, 11));
+		contenido.fill = GridBagConstraints.HORIZONTAL;
+		contenido.weightx = 0.03;
+		contenido.weighty = 0.03;
+		contenido.gridx = 1;
+		contenido.gridy = 1;
+		VentanaJFrame.panelCentro.add(etiqueta45, contenido);
+		
+	}
+	
+	public static boolean validarUsuario() {
+		for(int i=0;i<Usuario.lista.size();i++) {
+			try {
 				if(Usuario.lista.get(i).getcedula()==Integer.parseInt(cajadetexto.getText())) {
 					bandera=1;
-					cedula=i;}
-				}catch(java.lang.NumberFormatException sd) {
-					JOptionPane.showMessageDialog(null, "El numero de la tarjeta es incorrecto", "error", JOptionPane.ERROR_MESSAGE); 
-					cajadetexto.setText("");
+					cedula=i;
+					val= true;
+					System.out.println("VERDADERO");
 				}
+				else {
+					val= false;
+					System.out.println("FALSO");
 				}
+			}
+			catch(java.lang.NumberFormatException sd) {
+				cajadetexto.setText("");
+				JOptionPane.showMessageDialog(null, "Ingrese solo numeros a este campo", "Error", JOptionPane.ERROR_MESSAGE); 
+			}
+		}
+		return val;
+	}
+	public static void ingresar(int rec) {
+		try {
+			//bandera = rec;
+			System.out.println("0000."+bandera);
+			System.out.println("1111."+rec);
+			//while(validarUsuario()!=true){
+				System.out.println("00."+bandera);
+				System.out.println("11."+rec);
 			
-				if(bandera==0) {
-					JOptionPane.showMessageDialog(null, "El numero de la tarjeta es incorrecto", "error", JOptionPane.ERROR_MESSAGE); 
+			if(validarUsuario()==false) {
+					etiqueta52.setText("Estamos procesando su transacción...");
+					rec = 0;
+					System.out.println("0."+bandera);
+					System.out.println("1."+rec);
 					cajadetexto.setText("");
+					JOptionPane.showMessageDialog(null, "El numero de la tarjeta es incorrecto", "Error", JOptionPane.ERROR_MESSAGE); 
+			}
+			else if(validarUsuario()==true) {
+				rec = 1;
+				System.out.println("2."+bandera);
+				System.out.println("3."+rec);
+				registrar2.setEnabled(true);
+				registrar16.setEnabled(false);
+			//}
+			bandera = rec;
+			System.out.println("welcome"+bandera);
+			etiqueta52.setText("BIENVENIDO");
+			boton1.addActionListener (new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+						try {
+							clavevalidar=clavevalidar+"1";
+							clave1.setText(clavevalidar);
+						}
+						catch(java.lang.NullPointerException c) {
+							
+						}
+
+				}});
+					boton2.addActionListener (new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+							try {
+							clavevalidar=clavevalidar+"2";
+							clave1.setText(clavevalidar);
+							}
+							catch(java.lang.NullPointerException c) {
+								
+							}
+						}
+				});
+					boton3.addActionListener (new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+							try {
+							clavevalidar=clavevalidar+"3";
+							clave1.setText(clavevalidar);
+							}
+							catch(java.lang.NullPointerException c) {
+								
+							}
+						}
+				});
+					boton4.addActionListener (new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+						try {
+							clavevalidar=clavevalidar+"4";
+							clave1.setText(clavevalidar);
+						}
+						catch(java.lang.NullPointerException c) {
+					}
 				}
+				});
+					boton5.addActionListener (new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+						try {
+							clavevalidar=clavevalidar+"5";
+							clave1.setText(clavevalidar);
+						}
+						catch(java.lang.NullPointerException c) {
+					}}
+				});
+					boton6.addActionListener (new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+							try {
+							clavevalidar=clavevalidar+"6";
+							clave1.setText(clavevalidar);
+							}
+							catch(java.lang.NullPointerException c) {
+					}}
+				});
+					boton7.addActionListener (new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+						try {
+							clavevalidar=clavevalidar+"7";
+							clave1.setText(clavevalidar);
+						}
+						catch(java.lang.NullPointerException c) {
+					}}
+				});
+					boton8.addActionListener (new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+						try {
+							clavevalidar=clavevalidar+"8";
+							clave1.setText(clavevalidar);
+						}
+						catch(java.lang.NullPointerException c) {
+					}}
+				});
+					boton9.addActionListener (new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+						try {
+							clavevalidar=clavevalidar+"9";
+							clave1.setText(clavevalidar);
+						}
+						catch(java.lang.NullPointerException c) {
+					}}
+				});
+					boton02.addActionListener (new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+						try {
+							clavevalidar=clavevalidar+"0";
+							clave1.setText(clavevalidar);
+						}
+						catch(java.lang.NullPointerException c) {
+					}}
+				});
 				if(bandera==1) {
-					etiqueta52.setText(".");
+					etiqueta52.setText("BIENVENIDO "+Usuario.lista.get(i).getNombre());
 					VentanaJFrame.panelCentro.removeAll();
 					VentanaJFrame.panelCentro.repaint();
 					VentanaJFrame.panelBusqueda.removeAll();
@@ -547,35 +647,35 @@ public class PanelAbajo extends JPanel {
 					VentanaJFrame.panelBusqueda.add(registrar12, contenido);
 					
 	
-					
-				
-				}
-				}
-				catch(java.lang.NullPointerException sd) {
-					
-						JOptionPane.showMessageDialog(null, "El numero de la tarjeta es incorrecto", "error", JOptionPane.ERROR_MESSAGE); 
-			
-				}
-				VentanaJFrame.panelFormulario.registrar.addActionListener (new ActionListener(){
-					public void actionPerformed(ActionEvent e){
-						retiro();
-						
-					}});
-				VentanaJFrame.panelFormulario.registrar1.addActionListener (new ActionListener(){
+					VentanaJFrame.panelFormulario.registrar.addActionListener (new ActionListener(){
 						public void actionPerformed(ActionEvent e){
-							a=2;
-							validarclave();
+							retiro();
 							
 						}});
-				VentanaJFrame.panelBusqueda.registrar4.addActionListener (new ActionListener(){
-					public void actionPerformed(ActionEvent e){
-						a=3;
-						validarclave();
-						
-					}});
-					
-			
+					VentanaJFrame.panelFormulario.registrar1.addActionListener (new ActionListener(){
+							public void actionPerformed(ActionEvent e){
+								a=2;
+								validarclave();
+								
+							}});
+					VentanaJFrame.panelBusqueda.registrar4.addActionListener (new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+							a=3;
+							validarclave();
+							
+					}});	
+				}
 			}
+		}
+				catch(java.lang.NullPointerException sd) {
+					
+						JOptionPane.showMessageDialog(null, "No se ha encontrado esta cedula", "error", JOptionPane.ERROR_MESSAGE); 
+			
+				}
+				
+						
+			
+}
 	private static void retiro() {
 		VentanaJFrame.panelCentro.removeAll();
 		VentanaJFrame.panelCentro.repaint();
@@ -628,8 +728,6 @@ public class PanelAbajo extends JPanel {
 		contenido.gridx = 1;
 		contenido.gridy = 2;
 		VentanaJFrame.panelCentro.add(retiro2,contenido);
-		
-		
 		
 		JLabel retiro1 = new JLabel();
 		retiro1.setFont(new java.awt.Font("Tahoma", 1, 16));
@@ -722,15 +820,12 @@ public class PanelAbajo extends JPanel {
 		contenido.gridx = 1;
 		contenido.gridy = 3;
 		VentanaJFrame.panelFormulario.add(dos,contenido);
-		
-		
-		
+				
 		dos.addActionListener (new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				valor=200000;
 				clave(valor);			
 			}});
-			
 		cien.addActionListener (new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					valor=100000;
@@ -742,7 +837,7 @@ public class PanelAbajo extends JPanel {
 				valor=20000;
 				clave(valor);
 			}
-	});
+		});
 		cinco.addActionListener (new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				valor=50000;
@@ -768,8 +863,6 @@ public class PanelAbajo extends JPanel {
 			if(Usuario.lista.get(cedula).getsueldo()>=valor) {
 				a=1;
 				validarclave();
-				
-				
 			}
 			else {
 				etiqueta52.setText("DINERO INSUFICIENTE");
@@ -778,7 +871,7 @@ public class PanelAbajo extends JPanel {
 		}
 
 		private static void validarclave() {
-			
+			try {
 			registrar2.setEnabled(false);
 			etiqueta52.setText(" ..");
 			
@@ -867,7 +960,7 @@ public class PanelAbajo extends JPanel {
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "Ya ha superado el numero de intentos", "error", JOptionPane.ERROR_MESSAGE); 
-							ingresar();//AQUI QUIERO QUE SALGA?
+							salir();//AQUI QUIERO QUE SALGA?
 						}
 					}
 				}
@@ -955,23 +1048,190 @@ public class PanelAbajo extends JPanel {
 				}
 				
 				continuar1.addActionListener (new ActionListener(){	
-					
-					public void actionPerformed(ActionEvent e){
+						public void actionPerformed(ActionEvent e){
 						etiqueta52.setText("CAMBIO DE CLAVE EXITOSO");
 						int nueva=Integer.parseInt(clave1.getText());
 						Usuario.lista.get(cedula).setclave(nueva);
-						ingresar();
+						ingresar(1);
 					}});
+				
+				
 				}
 			});
+			}
+			catch(java.lang.NullPointerException a) {
+				
+			}
 			
+		
+
+
 			
 		}
 
+	static void pagos() {
+		etiqueta52.setText("PAGOS: "+Usuario.lista.get(i).getNombre());
+		VentanaJFrame.panelCentro.removeAll();
+		VentanaJFrame.panelCentro.repaint();
+		VentanaJFrame.panelBusqueda.removeAll();
+		VentanaJFrame.panelBusqueda.repaint();
+		VentanaJFrame.panelFormulario.removeAll();
+		VentanaJFrame.panelFormulario.repaint();
+		registrar2.setEnabled(false);
+		
+		JList q1 = new JList();
+		
+		DefaultListModel listModel= new DefaultListModel<String>();
+		listModel.addElement(pag);
+		q1.setModel(listModel);
+		contenido.weighty = 0.3;
+		contenido.weightx = 34;
+		contenido.gridx = 1;
+		contenido.gridy = 1;	
+		VentanaJFrame.panelCentro.add(q1,contenido);
+		
+		JLabel q = new JLabel();
+		q.setText("				            ");
+		q.setFont(new java.awt.Font("Tahoma", 1, 16));
+		contenido.weighty = 0.3;
+		contenido.weightx = 22;
+		contenido.gridx = 0;
+		contenido.gridy = 1;	
+		VentanaJFrame.panelCentro.add(q,contenido);
+		
+		JLabel clave3 = new JLabel();
+		clave3.setText("DIGITE SU NUEVA CLAVE");
+		clave3.setFont(new java.awt.Font("Tahoma", 1, 16));
+		contenido.weighty = 0.3;
+		contenido.weightx = 0.5;
+		contenido.gridx = 2;
+		contenido.gridy = 2;	
+		VentanaJFrame.panelCentro.add(clave3,contenido);
 
-			
-	
+		clave1 = new JTextField();				
+		contenido.weighty = 0.3;
+		contenido.weightx = 0.5;
+		contenido.gridx = 2;
+		contenido.gridy = 3;
+		VentanaJFrame.panelCentro.add(clave1,contenido);
+
+		
+		continuar1=new JButton();
+		continuar1.setText("CONTINUAR");
+		continuar1.setForeground(Color.WHITE);
+		continuar1.setBackground(Color.red);
+		contenido.weighty = 0.3;
+		contenido.weightx = 0.5;
+		contenido.gridx = 2;
+		contenido.gridy = 4;
+		VentanaJFrame.panelCentro.add(continuar1,contenido);
+		
+		MouseListener mouseListener = new MouseAdapter() 
+		{
+		    public void mouseClicked(MouseEvent e) 
+		    {
+		        if (e.getClickCount() == 1) 
+		        {
+		            int posicion = q1.locationToIndex(e.getPoint());
+		            String[] bcs = (String[]) q1.getSelectedValue();
+		            System.out.println("TENGO ESTO :"+bcs.toString());
+		            //PanelCentral aveImprimir = new PanelCentral(bcs.toString(),bcs.getEsp(),Integer.toString(bcs.getEdad()),Integer.toString(bcs.getPuntos()));
+		            //System.out.println("La posicion es " + posicion);
+		         }
+		    }
+		};
+		
 	}
+	static void transferencias() {
+		try {
+			registrar2.setEnabled(false);
+			etiqueta52.setText("Transferencia de dinero...");
+			
+			VentanaJFrame.panelCentro.removeAll();
+			VentanaJFrame.panelCentro.repaint();
+			VentanaJFrame.panelBusqueda.removeAll();
+			VentanaJFrame.panelBusqueda.repaint();
+			VentanaJFrame.panelFormulario.removeAll();
+			VentanaJFrame.panelFormulario.repaint();
+			
+			JList f1 = new JList();
+			
+			DefaultListModel listModel= new DefaultListModel<String>();
+			listModel.addElement(trans);
+			f1.setModel(listModel);
+			contenido.weighty = 0.3;
+			contenido.weightx = 34;
+			contenido.gridx = 1;
+			contenido.gridy = 1;	
+			VentanaJFrame.panelCentro.add(f1,contenido);
+			
+			JLabel q1 = new JLabel();
+			q1.setText("									");
+			q1.setFont(new java.awt.Font("Tahoma", 1, 16));
+			contenido.weighty = 0.3;
+			contenido.weightx = 34;
+			contenido.gridx = 3;
+			contenido.gridy = 1;	
+			VentanaJFrame.panelCentro.add(q1,contenido);
+			
+			JLabel q = new JLabel();
+			q.setText("				            ");
+			q.setFont(new java.awt.Font("Tahoma", 1, 16));
+			contenido.weighty = 0.3;
+			contenido.weightx = 22;
+			contenido.gridx = 0;
+			contenido.gridy = 1;	
+			VentanaJFrame.panelCentro.add(q,contenido);
+			
+			JLabel clave2 = new JLabel();
+			clave2.setText("DIGITE LA CUENTA A LA QUE QUIERE TRANSFERIR:");
+			clave2.setFont(new java.awt.Font("Tahoma", 1, 16));
+			contenido.weighty = 0.3;
+			contenido.weightx = 0.5;
+			contenido.gridx = 2;
+			contenido.gridy = 2;	
+			VentanaJFrame.panelCentro.add(clave2,contenido);
+
+			clave1 = new JTextField();				
+			contenido.weighty = 0.3;
+			contenido.weightx = 0.5;
+			contenido.gridx = 2;
+			contenido.gridy = 3;
+			VentanaJFrame.panelCentro.add(clave1,contenido);
+			clavevalidar="";
+			clave1.setText("");
+			
+			continuar=new JButton();
+			continuar.setText("CONTINUAR");
+			continuar.setForeground(Color.WHITE);
+			continuar.setBackground(Color.red);
+			contenido.weighty = 0.3;
+			contenido.weightx = 0.5;
+			contenido.gridx = 2;
+			contenido.gridy = 4;
+			VentanaJFrame.panelCentro.add(continuar,contenido);
+			
+			MouseListener mouseListener = new MouseAdapter() 
+			{
+			    public void mouseClicked(MouseEvent e) 
+			    {
+			        if (e.getClickCount() == 1) 
+			        {
+			            int posicion = f1.locationToIndex(e.getPoint());
+			            String[] bcs = (String[]) f1.getSelectedValue();
+			            System.out.println("TENGO ESTO :"+bcs.toString());
+			            //PanelCentral aveImprimir = new PanelCentral(bcs.toString(),bcs.getEsp(),Integer.toString(bcs.getEdad()),Integer.toString(bcs.getPuntos()));
+			            //System.out.println("La posicion es " + posicion);
+			         }
+			    }
+			};
+		}
+		catch(java.lang.NullPointerException a) {
+			
+		}
+	
+}
+}
 				
 			
 		

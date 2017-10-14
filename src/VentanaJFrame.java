@@ -17,17 +17,16 @@ public class VentanaJFrame extends JFrame {
 	static PanelIzquierdo panelBusqueda;
 	static PanelDerecho panelFormulario;
 
-	
+	//Constructor que llama los metodos para configurar, poner los JPanel, y mostrar el JFrame
 	VentanaJFrame(){
 		 super("Ventana JFrame Principal");
 		 iniciar();
 		 componente();
 		 setVisible(true);
 		 pack();
-		// Centrar la ventana
          setLocationRelativeTo( null );
 	}
-	
+	//Metodo que devuelve valores para la configuracion inicial del JFrame 
 	public VentanaJFrame iniciar(){
 				
 				Dimension dims = new Dimension(750, 700);
@@ -39,7 +38,7 @@ public class VentanaJFrame extends JFrame {
 				return this;
 	}
 	
-	
+	//Metodo que coloca cada JPanel en la ubicacion dada segun su Layout
 	public void componente() {
 		
 	
@@ -51,7 +50,6 @@ public class VentanaJFrame extends JFrame {
         add( panelAbajo, BorderLayout.SOUTH );
 
         panelFormulario = new PanelDerecho();
-
         add(panelFormulario , BorderLayout.WEST);
         
         panelBusqueda = new PanelIzquierdo();

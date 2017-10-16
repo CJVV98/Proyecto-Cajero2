@@ -19,7 +19,7 @@ public class PanelAbajo extends JPanel {
 	 
 	static boolean val;
 	static Usuario usuario;
-    static JButton btnOpcion1,registrar2,registrar16,boton1,boton2,boton3,boton4,boton5,boton6,boton7,boton8,boton9,boton02,continuar,salir,cancelar,continuar1,continuar12;
+    static JButton limpiar,btnOpcion1,registrar2,registrar16,boton1,boton2,boton3,boton4,boton5,boton6,boton7,boton8,boton9,boton02,continuar,salir,cancelar,continuar1,continuar12;
     static JLabel etiqueta52,saldo1;
 	static int bandera=0,cedula,valor,claveerronea=0;
 	static JTextField cajadetexto;
@@ -45,8 +45,6 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 0;
 	add(etiqueta, contenido);
 	
-	
-			
 	JLabel etiqueta1 = new JLabel("");
 	etiqueta1.setForeground(Color.BLACK);
 	contenido.fill = GridBagConstraints.BOTH;
@@ -160,6 +158,7 @@ public class PanelAbajo extends JPanel {
 	cancelar.setForeground(Color.WHITE);
 	cancelar.setBackground(Color.red);
 	cancelar.setText("CANCELAR");
+	cancelar.setEnabled(false);
 	contenido.fill = GridBagConstraints.HORIZONTAL;
 	contenido.weighty = 0.3;
 	contenido.weightx = 0.2;
@@ -167,10 +166,11 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 1;
 	add(cancelar, contenido);
 	
-	JButton limpiar = new JButton();
+	limpiar = new JButton();
 	limpiar.setForeground(Color.WHITE);
 	limpiar.setBackground(Color.red);
 	limpiar.setText("LIMPIAR");
+	limpiar.setEnabled(false);
 	contenido.fill = GridBagConstraints.HORIZONTAL;
 	contenido.weighty = 0.3;
 	contenido.weightx = 0.2;
@@ -182,6 +182,7 @@ public class PanelAbajo extends JPanel {
 	salir.setForeground(Color.WHITE);
 	salir.setBackground(Color.red);
 	salir.setText("SALIR");
+	salir.setEnabled(false);
 	contenido.fill = GridBagConstraints.HORIZONTAL;
 	contenido.weighty = 0.3;
 	contenido.weightx = 0.2;
@@ -258,7 +259,6 @@ public class PanelAbajo extends JPanel {
 	add(etiqueta13, contenido);
 	
 	cajadetexto = new JTextField();
-	cajadetexto.setText("CC");
 	contenido.fill = GridBagConstraints.HORIZONTAL;
 	contenido.weightx = 0.03;
 	contenido.gridx = 5;
@@ -425,44 +425,7 @@ public class PanelAbajo extends JPanel {
 }
 	
 	public static void salir() {
-		etiqueta52.setText(".");
-		VentanaJFrame.panelCentro.removeAll();
-		VentanaJFrame.panelCentro.repaint();
-		VentanaJFrame.panelBusqueda.removeAll();
-		VentanaJFrame.panelBusqueda.repaint();
-		VentanaJFrame.panelFormulario.removeAll();
-		VentanaJFrame.panelFormulario.repaint();
-		registrar2.setEnabled(false);
-		JLabel etiqueta = new JLabel(" BIENVENIDO A CAJERO UDEC ");
-		etiqueta.setForeground(Color.BLACK);
-		etiqueta.setFont(new java.awt.Font("Tahoma", 1, 19));
-		contenido.fill = GridBagConstraints.HORIZONTAL;
-		contenido.weightx = 0.03;
-		contenido.weighty = 0.03;
-		contenido.gridx = 1;
-		contenido.gridy = 0;
-		VentanaJFrame.panelCentro.add(etiqueta, contenido);
-		
-		ImageIcon imagen = new ImageIcon( "images/tarjeta.png");		
-		JLabel foto = new JLabel(imagen);
-		contenido.fill = GridBagConstraints.HORIZONTAL;
-		contenido.weightx = 0.03;
-		contenido.weighty = 0.03;
-		contenido.gridx = 0;
-		contenido.gridy = 0;
-		VentanaJFrame.panelCentro.add(foto, contenido);
-		
-		JLabel etiqueta45 = new JLabel(" INSERTE SU TARJETA ");
-		etiqueta45.setForeground(Color.BLACK);
-		etiqueta45.setFont(new java.awt.Font("Tahoma", 1, 11));
-		contenido.fill = GridBagConstraints.HORIZONTAL;
-		contenido.weightx = 0.03;
-		contenido.weighty = 0.03;
-		contenido.gridx = 1;
-		contenido.gridy = 1;
-		VentanaJFrame.panelCentro.add(etiqueta45, contenido);
-		
-		
+		VentanaJFrame a = new VentanaJFrame();
 	}
 	
 	public static boolean validarUsuario() {
@@ -510,6 +473,9 @@ public class PanelAbajo extends JPanel {
 				registrar2.setEnabled(true);
 				registrar16.setEnabled(false);
 			//}
+			cancelar.setEnabled(true);
+			
+			salir.setEnabled(true);
 			bandera = rec;
 			System.out.println("welcome"+bandera);
 			etiqueta52.setText("BIENVENIDO");
@@ -696,6 +662,7 @@ public class PanelAbajo extends JPanel {
 		VentanaJFrame.panelFormulario.removeAll();
 		VentanaJFrame.panelFormulario.repaint();
 		registrar2.setEnabled(false);
+		
 		etiqueta52.setText(" BIENVENIDO.");
 		
 		JLabel etiqueta42 = new JLabel("     ");
@@ -885,6 +852,7 @@ public class PanelAbajo extends JPanel {
 		private static void validarclave() {
 			try {
 			registrar2.setEnabled(false);
+			limpiar.setEnabled(true);
 			etiqueta52.setText("..");
 			
 			VentanaJFrame.panelCentro.removeAll();
@@ -940,12 +908,17 @@ public class PanelAbajo extends JPanel {
 			contenido.gridy = 4;
 			VentanaJFrame.panelCentro.add(continuar,contenido);
 
-			
+			limpiar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					clave1.setText(null);
+				}
+			});
 		
 			
 			
 			continuar.addActionListener (new ActionListener(){
 				public void actionPerformed(ActionEvent e){
+					limpiar.setEnabled(true);
 					if(a==1) {
 					if(Usuario.lista.get(cedula).getclave()==Integer.parseInt(clavevalidar)){
 					System.out.println("SUELDO"+Usuario.lista.get(cedula).getsueldo());
@@ -954,11 +927,11 @@ public class PanelAbajo extends JPanel {
 					Usuario.lista.get(cedula).setsueldo(sueldot);
 					System.out.println("NUEVO SUELDO"+Usuario.lista.get(cedula).getsueldo());
 					etiqueta52.setText("TRANSFERENCIA EXITOSA");
-					
+					transaccionExitosa();
 					System.out.println("LA CLAVE ES"+clave1.getText());
 					clavevalidar="";
 					clave1.setText("");
-					
+					transaccionExitosa();
 				
 					}
 					else {
@@ -996,10 +969,26 @@ public class PanelAbajo extends JPanel {
 					contenido.gridx = 2;
 					contenido.gridy = 6;
 					VentanaJFrame.panelCentro.add(saldo1,contenido);
-			
+					
+					JButton  continuar = new JButton();
+					continuar.setText("CONTINUAR");
+					continuar.setForeground(Color.WHITE);
+					continuar.setBackground(Color.red);
+					contenido.weighty = 0.3;
+					contenido.weightx = 0.5;
+					contenido.gridx = 4;
+					contenido.gridy = 6;
+					VentanaJFrame.panelCentro.add(continuar,contenido);
+					
+					continuar.addActionListener (new ActionListener(){	
+						public void actionPerformed(ActionEvent e){
+							transaccionExitosa();
+							
+					}});
 					
 				}
 				if(a==3) {
+					limpiar.setEnabled(true);
 					clavevalidar="";
 					clave1.setText("");
 					registrar2.setEnabled(false);
@@ -1046,7 +1035,6 @@ public class PanelAbajo extends JPanel {
 					contenido.gridy = 3;
 					VentanaJFrame.panelCentro.add(clave1,contenido);
 	
-					
 					continuar12=new JButton();
 					continuar12.setText("CONTINUAR");
 					continuar12.setForeground(Color.WHITE);
@@ -1066,6 +1054,12 @@ public class PanelAbajo extends JPanel {
 						ingresar(1);
 							
 					}});
+					
+					limpiar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							clave1.setText(null);
+						}
+					});
 						
 				}		
 				
@@ -1093,6 +1087,7 @@ public class PanelAbajo extends JPanel {
 			VentanaJFrame.panelBusqueda.repaint();
 			VentanaJFrame.panelFormulario.removeAll();
 			VentanaJFrame.panelFormulario.repaint();
+			limpiar.setEnabled(true);
 			etiqueta52.setText("-");
 			JLabel etiqueta42 = new JLabel("     ");
 			etiqueta42.setForeground(Color.BLACK);
@@ -1104,9 +1099,7 @@ public class PanelAbajo extends JPanel {
 			contenido.gridy = 0;
 			VentanaJFrame.panelCentro.add(etiqueta42, contenido);
 			
-		
-			
-			JLabel etiquetaemp = new JLabel("EMPRESA ");
+			JLabel etiquetaemp = new JLabel("EMPRESA: ");
 			etiquetaemp.setForeground(Color.BLACK);
 			contenido.fill = GridBagConstraints.HORIZONTAL;
 			contenido.weightx = 0.0000003;
@@ -1116,7 +1109,7 @@ public class PanelAbajo extends JPanel {
 			VentanaJFrame.panelCentro.add(etiquetaemp, contenido);
 			
 			JComboBox selectoremp = new JComboBox();
-			selectoremp.setModel(new DefaultComboBoxModel(new String[] {"Agua","Luz","Gas","Telefono","Internet"}));
+			selectoremp.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una empresa","Agua","Luz","Gas","Telefono","Internet"}));
 			selectoremp.setSelectedIndex(0);
 			contenido.fill = GridBagConstraints.HORIZONTAL;
 			contenido.weightx = 0.00003;
@@ -1141,7 +1134,7 @@ public class PanelAbajo extends JPanel {
 			contenido.gridy = 2;
 			VentanaJFrame.panelCentro.add(numeropag, contenido);
 			
-			JLabel etiqueta3 = new JLabel("VALOR A TRANSFERIR ");
+			JLabel etiqueta3 = new JLabel("VALOR DEL PAGO ");
 			etiqueta3.setForeground(Color.BLACK);
 			contenido.fill = GridBagConstraints.HORIZONTAL;	
 			contenido.gridx = 1;
@@ -1168,14 +1161,29 @@ public class PanelAbajo extends JPanel {
 			continuar2.addActionListener (new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					try {
+						if(selectoremp.getSelectedIndex()==0) {
+							JOptionPane.showMessageDialog(null, "Seleccione una empresa", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						else if(numeropag.getText().isEmpty()||valorpag.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Por favor llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						else {
 					valor=Integer.parseInt(valorpag.getText());
 					System.out.println("entro");
 					clave(valor);
+					}
 					}catch(java.lang.NumberFormatException ds) {
 						
 					}
 				}
 		});
+			limpiar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					numeropag.setText(null);
+					valorpag.setText(null);
+					selectoremp.setSelectedItem(0);
+				}
+			});
 		}
 		
 		private static void transferir() {
@@ -1186,7 +1194,7 @@ public class PanelAbajo extends JPanel {
 			VentanaJFrame.panelBusqueda.repaint();
 			VentanaJFrame.panelFormulario.removeAll();
 			VentanaJFrame.panelFormulario.repaint();
-			etiqueta52.setText(" ,......");
+			etiqueta52.setText(".......");
 			
 			JLabel etiqueta42 = new JLabel("     ");
 			etiqueta42.setForeground(Color.BLACK);
@@ -1197,8 +1205,6 @@ public class PanelAbajo extends JPanel {
 			contenido.gridx = 0;
 			contenido.gridy = 0;
 			VentanaJFrame.panelCentro.add(etiqueta42, contenido);
-			
-			
 			
 			JLabel etiqueta = new JLabel("NOMBRE ");
 			etiqueta.setForeground(Color.BLACK);
@@ -1217,7 +1223,7 @@ public class PanelAbajo extends JPanel {
 			contenido.gridy = 1;
 			VentanaJFrame.panelCentro.add(nombretra, contenido);
 			
-			JLabel etiqueta1 = new JLabel("N DE CUENTA ");
+			JLabel etiqueta1 = new JLabel("N° DE CUENTA: ");
 			etiqueta1.setForeground(Color.BLACK);
 			contenido.fill = GridBagConstraints.HORIZONTAL;
 			contenido.weightx =  0.00003;
@@ -1242,7 +1248,7 @@ public class PanelAbajo extends JPanel {
 			VentanaJFrame.panelCentro.add(etiqueta3, contenido);
 			
 			JComboBox valort = new JComboBox();
-			valort.setModel(new DefaultComboBoxModel(new String[] {"10000","20000","50000","100000","200000","500000"}));
+			valort.setModel(new DefaultComboBoxModel(new String[] {"Seleccione un valor","10000","20000","50000","100000","200000","500000"}));
 			valort.setSelectedIndex(0);
 			contenido.fill = GridBagConstraints.HORIZONTAL;
 			contenido.weightx = 0.0003;
@@ -1260,17 +1266,33 @@ public class PanelAbajo extends JPanel {
 			contenido.gridy = 4;
 			VentanaJFrame.panelCentro.add( continuar14,contenido);
 			System.out.println("entro");
-			
+			limpiar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					nombretra.setText(null);
+					ncuenta.setText(null);
+					valort.setSelectedItem(0);
+				}
+			});
 			continuar14.addActionListener (new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					try {
 					System.out.println("entro1sdsdsd2");
+					if(valort.getSelectedIndex()==0) {
+						JOptionPane.showMessageDialog(null, "Seleccione un valor", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					else if(ncuenta.getText().isEmpty()||nombretra.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Por favor llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					else {
+					
 					String valoraux=(String) valort.getSelectedItem();
 					System.out.println(valoraux);
 					valor=Integer.parseInt(valoraux);
 					System.out.println(valor);
 					System.out.println("entro");
 					clave(valor);
+					
+					}
 					}catch(java.lang.NumberFormatException ds) {
 						
 					}
@@ -1279,7 +1301,82 @@ public class PanelAbajo extends JPanel {
 			
 		
 		}
+public static void transaccionExitosa() {
+	VentanaJFrame.panelCentro.removeAll();
+	VentanaJFrame.panelCentro.repaint();
+	VentanaJFrame.panelBusqueda.removeAll();
+	VentanaJFrame.panelBusqueda.repaint();
+	VentanaJFrame.panelFormulario.removeAll();
+	VentanaJFrame.panelFormulario.repaint();
+	
+	JLabel q1 = new JLabel();
+	q1.setText("									");
+	q1.setFont(new java.awt.Font("Tahoma", 1, 16));
+	contenido.weighty = 0.3;
+	contenido.weightx = 34;
+	contenido.gridx = 3;
+	contenido.gridy = 1;	
+	VentanaJFrame.panelCentro.add(q1,contenido);
+	
+	JLabel q = new JLabel();
+	q.setText("				            ");
+	q.setFont(new java.awt.Font("Tahoma", 1, 16));
+	contenido.weighty = 0.3;
+	contenido.weightx = 22;
+	contenido.gridx = 0;
+	contenido.gridy = 1;	
+	VentanaJFrame.panelCentro.add(q,contenido);
+	
+	JLabel clave3 = new JLabel();
+	clave3.setText("TRANSACCIÓN TERMINADA");
+	clave3.setFont(new java.awt.Font("Tahoma", 1, 16));
+	contenido.weighty = 0.3;
+	contenido.weightx = 0.5;
+	contenido.gridx = 2;
+	contenido.gridy = 2;	
+	VentanaJFrame.panelCentro.add(clave3,contenido);
 
+	continuar12=new JButton();
+	continuar12.setText("MENU PRINCIPAL");
+	continuar12.setForeground(Color.WHITE);
+	continuar12.setBackground(Color.red);
+	contenido.weighty = 0.3;
+	contenido.weightx = 0.5;
+	contenido.gridx = 1;
+	contenido.gridy = 4;
+	VentanaJFrame.panelCentro.add(continuar12,contenido);
+	
+	JLabel q3 = new JLabel();
+	q3.setText("				                                       ");
+	q3.setFont(new java.awt.Font("Tahoma", 1, 16));
+	contenido.weighty = 0.3;
+	contenido.weightx = 22;
+	contenido.gridx = 2;
+	contenido.gridy = 4;	
+	VentanaJFrame.panelCentro.add(q3,contenido);
+	
+	JButton salir1 = new JButton();
+	salir1.setText("SALIR");
+	salir1.setForeground(Color.WHITE);
+	salir1.setBackground(Color.red);
+	contenido.weighty = 0.3;
+	contenido.weightx = 0.5;
+	contenido.gridx = 3;
+	contenido.gridy = 4;
+	VentanaJFrame.panelCentro.add(salir1,contenido);
+	
+	
+	continuar12.addActionListener (new ActionListener(){	
+		public void actionPerformed(ActionEvent e){
+		ingresar(1);
+			
+	}});
+	salir1.addActionListener (new ActionListener(){	
+		public void actionPerformed(ActionEvent e){
+		salir();
+			
+	}});
+}
 	
 }
 				

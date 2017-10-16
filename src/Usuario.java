@@ -121,7 +121,7 @@ static String nombresuser;
 			public void actionPerformed(ActionEvent e){  
 				try {
                             if(cajadetexto.getText().equals("") || cajadetexto1.getText().equals("") || cedula.getText().equals("")|| saldo.getText().equals("") || clave.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Error por favor complete las casillas", "error", JOptionPane.ERROR_MESSAGE); 
+					JOptionPane.showMessageDialog(null, "Error por favor complete las casillas", "Error", JOptionPane.ERROR_MESSAGE); 
 				}
                             else{
                 nombresuser=cajadetexto.getText()+" "+cajadetexto1.getText();
@@ -130,7 +130,7 @@ static String nombresuser;
                                 dispose(); 
                                         } 
 				}catch (java.lang.NumberFormatException s) {
-					JOptionPane.showMessageDialog(null, "Revisar los datos numericos", "error", JOptionPane.ERROR_MESSAGE); 
+					JOptionPane.showMessageDialog(null, "Revisar los datos numericos", "Error", JOptionPane.ERROR_MESSAGE); 
 				}
                             
                              

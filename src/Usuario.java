@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
@@ -164,7 +165,7 @@ static String nombresuser;
 		clave.setBounds(10, 170, 90, 60);
 		contentPane.add(clave );
 				
-		JTextField clave1 = new JTextField();
+		JPasswordField clave1 = new JPasswordField();
 		clave1.setBounds(120, 195,290, 20);
 		contentPane.add(clave1);
 		

@@ -392,46 +392,67 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 15;       //third row
 	add(registrar, contenido);
 	
-	// si escucha este boton accede al cajero 
+	
 	registrar2.addActionListener (new ActionListener(){
+<<<<<<< HEAD
 		/**
 		 * Metodo para ingresar al metodo ingresar
 		 */
+=======
+		//metodo que lee el boton e inserta la "tarjeta" (cedula) para iniciar una nueva oparacion de algun usuario
+>>>>>>> master
 		public void actionPerformed(ActionEvent e){	
 			ingresar(2);
 	}});
-	// cuando escucha este boton ingresa a un JFrame nuevo de tipo usuario donde compleatara unos datos de registro
+	
 	registrar16.addActionListener (new ActionListener(){
+<<<<<<< HEAD
 		/**
 		 * Metodo para crear nuevo usuario apartir del listener del boton nuevo usuario
 		 */
+=======
+		//metodo que lee el boton y abre el formuario para ingresar un nuevo usuario 
+>>>>>>> master
 		public void actionPerformed(ActionEvent e){
 			usuario = new Usuario("USUARIO");
 			
 	}});
-	// si escucha este boton una vez halla ingresado al cajero el me devuelve al inicio
+	
 	cancelar.addActionListener (new ActionListener(){
+<<<<<<< HEAD
 		/**
 		 * Metodo para volver al menu principal a partir del listener del boton cancelar
 		 */
+=======
+		// metodo que cancela la operacion en curso y devuelve al inicio
+>>>>>>> master
 		public void actionPerformed(ActionEvent e){	
 			if(a==1|| a==2 || a==3 || a==5 || a==6) {
 				ingresar(1);}
 	}});
 	
-	//salir es para salir totalmente del sistema
+	
 	salir.addActionListener(new ActionListener() {
+<<<<<<< HEAD
 		/**
 		 * Metodo para salir del cajero
 		 */
+=======
+		//metodo que envia a salir totalmente del sistema
+>>>>>>> master
 		public void actionPerformed(ActionEvent e) {
 			a=0;
 			salir();
 	}});
+<<<<<<< HEAD
 	/**
 	 * Metodos para los botones numericos 
 	 */
+=======
+
+>>>>>>> master
 	boton1.addActionListener (new ActionListener(){
+		//metodo que lee el boton e imprime en la caja de texto el valor asigando a este boton
 		public void actionPerformed(ActionEvent e){
 		try {
 			clavevalidar=clavevalidar+"1";
@@ -443,6 +464,7 @@ public class PanelAbajo extends JPanel {
 
 }});
 	boton2.addActionListener (new ActionListener(){
+		//metodo que lee el boton e imprime en la caja de texto el valor asigando a este boton
 		public void actionPerformed(ActionEvent e){
 			try {
 			clavevalidar=clavevalidar+"2";
@@ -454,6 +476,7 @@ public class PanelAbajo extends JPanel {
 		}
 });
 	boton3.addActionListener (new ActionListener(){
+		//metodo que lee el boton e imprime en la caja de texto el valor asigando a este boton
 		public void actionPerformed(ActionEvent e){
 			try {
 			clavevalidar=clavevalidar+"3";
@@ -465,6 +488,7 @@ public class PanelAbajo extends JPanel {
 		}
 });
 	boton4.addActionListener (new ActionListener(){
+		//metodo que lee el boton e imprime en la caja de texto el valor asigando a este boton
 		public void actionPerformed(ActionEvent e){
 		try {
 			clavevalidar=clavevalidar+"4";
@@ -475,6 +499,7 @@ public class PanelAbajo extends JPanel {
 }
 });
 	boton5.addActionListener (new ActionListener(){
+		//metodo que lee el boton e imprime en la caja de texto el valor asigando a este boton
 		public void actionPerformed(ActionEvent e){
 		try {
 			clavevalidar=clavevalidar+"5";
@@ -484,6 +509,7 @@ public class PanelAbajo extends JPanel {
 	}}
 });
 	boton6.addActionListener (new ActionListener(){
+		//metodo que lee el boton e imprime en la caja de texto el valor asigando a este boton
 		public void actionPerformed(ActionEvent e){
 			try {
 			clavevalidar=clavevalidar+"6";
@@ -493,6 +519,7 @@ public class PanelAbajo extends JPanel {
 	}}
 });
 	boton7.addActionListener (new ActionListener(){
+		//metodo que lee el boton e imprime en la caja de texto el valor asigando a este boton
 		public void actionPerformed(ActionEvent e){
 		try {
 			clavevalidar=clavevalidar+"7";
@@ -502,6 +529,7 @@ public class PanelAbajo extends JPanel {
 	}}
 });
 	boton8.addActionListener (new ActionListener(){
+		//metodo que lee el boton e imprime en la caja de texto el valor asigando a este boton
 		public void actionPerformed(ActionEvent e){
 		try {
 			clavevalidar=clavevalidar+"8";
@@ -511,6 +539,7 @@ public class PanelAbajo extends JPanel {
 	}}
 });
 	boton9.addActionListener (new ActionListener(){
+		//metodo que lee el boton e imprime en la caja de texto el valor asigando a este boton
 		public void actionPerformed(ActionEvent e){
 		try {
 			clavevalidar=clavevalidar+"9";
@@ -520,6 +549,7 @@ public class PanelAbajo extends JPanel {
 	}}
 });
 	boton02.addActionListener (new ActionListener(){
+		//metodo que lee el boton e imprime en la caja de texto el valor asigando a este boton
 		public void actionPerformed(ActionEvent e){
 		try {
 			clavevalidar=clavevalidar+"0";
@@ -542,6 +572,7 @@ public static void salir() {
 		cajadetexto.setText("");
 		Principal.ventananuev();		
 		a=0;
+<<<<<<< HEAD
 		}
 
 /**
@@ -551,6 +582,11 @@ public static void salir() {
 public static boolean validarUsuario() {
 	validar2=0;
 	validar3=0;
+=======
+}
+	//metodo que valida si la cedula ingresada exite dentro de la lista y devuelve un valor verdadero sin existe o falso si no existe
+	public static boolean validarUsuario() {
+>>>>>>> master
 	
 		System.out.println("lista validar"+Usuario.lista.size());
 		for(int i=0;i<Usuario.lista.size();i++) {			
@@ -561,8 +597,11 @@ public static boolean validarUsuario() {
 					System.out.println("esta aqui la cc "+cajadetexto.getText());
 					validar2++;
 					cedula=i;
+<<<<<<< HEAD
 					System.out.println("La cedula pasor"+validar2);
 					
+=======
+>>>>>>> master
 				}
 				else {
 					validar3++;					
@@ -624,9 +663,13 @@ public static void ingresar(int rec) {
 			etiqueta52.setText("BIENVENIDO");
 			 
 				if(bandera==1) {
+<<<<<<< HEAD
 					
 					//repintamos el panel del centro aqui ponemos las operaciones a realizar
 					etiqueta52.setText("BIENVENIDO "+Usuario.lista.get(i).getNombre());
+=======
+					etiqueta52.setText("BIENVENIDO "+Usuario.lista.get(cedula).getNombre());
+>>>>>>> master
 					VentanaJFrame.panelCentro.removeAll();
 					VentanaJFrame.panelCentro.repaint();
 					VentanaJFrame.panelBusqueda.removeAll();
@@ -761,41 +804,41 @@ public static void ingresar(int rec) {
 					
 					//aqui es cuando el usuario selecciona algun boton de la operacion
 					VentanaJFrame.panelFormulario.retiroef.addActionListener (new ActionListener(){
+						//metodo que lee el boton y envia al metodo de retiro
 						public void actionPerformed(ActionEvent e){
 							retiro();
 							
 						}});
 					VentanaJFrame.panelFormulario.transferencias.addActionListener (new ActionListener(){
+						//metodo que lee el boton y envia al metodo de transferecias
 						public void actionPerformed(ActionEvent e){
 							transferir();
-							
 						}});
 					VentanaJFrame.panelBusqueda.pagos.addActionListener (new ActionListener(){
+						//metodo que lee el boton y envia al metodo de realizar pagos
 						public void actionPerformed(ActionEvent e){
 							realizarpagos();
 							
 						}});
 					VentanaJFrame.panelFormulario.consultarsa.addActionListener (new ActionListener(){
+						//metodo que lee el boton y envia a consultar la clave 
 							public void actionPerformed(ActionEvent e){
 								a=2;
 								validarclave();
 								
 							}});
 					VentanaJFrame.panelBusqueda.cambiocl.addActionListener (new ActionListener(){
+						//metodo que lee el boton y lo envia a cambiar la clave
 						public void actionPerformed(ActionEvent e){
+							
 							a=3;
 							validarclave();
 							
 					}});	
 				}
-				
-			
 		}
-				
-		}
-						
-			
-		}
+	}
+}
 		catch(java.lang.NullPointerException sd) {
 			
 			etiqueta52.setText("Procesando información.");
@@ -810,6 +853,7 @@ public static void ingresar(int rec) {
 		}
 	}
 	
+<<<<<<< HEAD
 	/**
 	 *  Metodo para mostrar el proceso del retiro del dinero
 	 *  @param etiqueta52 es para indicar el mensaje del proceso
@@ -817,6 +861,10 @@ public static void ingresar(int rec) {
 	 *  @param tic es para indicar los tiempos y por cada tiempo realizar acciones
 	 */
 private static void retirodinero() {
+=======
+	//metodo que simula el retraso de una operacion
+	private static void retirodinero() {
+>>>>>>> master
 		System.out.println("Retiro 2");
 		VentanaJFrame.panelBusqueda.removeAll();
 		VentanaJFrame.panelBusqueda.repaint();
@@ -830,7 +878,11 @@ private static void retirodinero() {
 		time2 = new TimerTask() {
 			int tic = 0;
 			@Override
+<<<<<<< HEAD
 			//aqui empieza a correr el tiempo y a ejecutar los tiempos
+=======
+			//metodo que pone una imagen un tiempo determinado de acuerdo a la operacion que se este realizando y para simular el tiempo de espera de la transaccion
+>>>>>>> master
 			public void run() {
 				if(tic==0) {
 					VentanaJFrame.panelCentro.removeAll();
@@ -897,8 +949,6 @@ private static void retirodinero() {
 				}
 						
 				tic++;	
-						
-						
 			}
 		};
 		// cada tic es cada vez que recorre
@@ -906,10 +956,8 @@ private static void retirodinero() {
 		timer12.schedule(time2, 0,3500);
 		// aqui indico que empieza desde 0 y va a una velocidad de 3500
 		
-	
-		
-		
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * Metodo para que el usuario escojo el monto a retirar
@@ -917,6 +965,10 @@ private static void retirodinero() {
 	 * 
 	 */
 private static void retiro() {
+=======
+	//metodo vacio que hace la operacion del retiro de dinero
+	private static void retiro() {
+>>>>>>> master
 		a=1;
 		VentanaJFrame.panelCentro.removeAll();
 		VentanaJFrame.panelCentro.repaint();
@@ -1063,35 +1115,41 @@ private static void retiro() {
 		VentanaJFrame.panelFormulario.add(dos,contenido);
 		// Aqui escucha los valores a retirar los guarda en una variable y los envia a una funcion		
 		dos.addActionListener (new ActionListener(){
+			//metodo que lee un boton y asigna un valor a la variable estatica para trabajar con las operaciones del usuario
 			public void actionPerformed(ActionEvent e){
 				valor=200000;
 				clave(valor);			
 			}});
 		cien.addActionListener (new ActionListener(){
+			//metodo que lee un boton y asigna un valor a la variable estatica para trabajar con las operaciones del usuario
 				public void actionPerformed(ActionEvent e){
 					valor=100000;
 					clave(valor);
 				}
 		});
 		veinte.addActionListener (new ActionListener(){
+			//metodo que lee un boton y asigna un valor a la variable estatica para trabajar con las operaciones del usuario
 			public void actionPerformed(ActionEvent e){
 				valor=20000;
 				clave(valor);
 			}
 		});
 		cinco.addActionListener (new ActionListener(){
+			//metodo que lee un boton y asigna un valor a la variable estatica para trabajar con las operaciones del usuario
 			public void actionPerformed(ActionEvent e){
 				valor=50000;
 				clave(valor);
 			}
 	});
 		seis.addActionListener (new ActionListener(){
+			//metodo que lee un boton y asigna un valor a la variable estatica para trabajar con las operaciones del usuario
 			public void actionPerformed(ActionEvent e){
 				valor=600000;
 				clave(valor);
 			}
 	});
 		cuatro.addActionListener (new ActionListener(){
+			//metodo que lee un boton y asigna un valor a la variable estatica para trabajar con las operaciones del usuario
 			public void actionPerformed(ActionEvent e){
 				valor=400000;
 				clave(valor);
@@ -1099,6 +1157,7 @@ private static void retiro() {
 	});
 	}
 	
+<<<<<<< HEAD
 
 /**
  * Metodo para validar que el saldo sea mayor a lo solicitado
@@ -1106,6 +1165,10 @@ private static void retiro() {
  */
 		
 private static void clave(int valor) {
+=======
+	//metodo que valida si el usario ingresado tiene el saldo suficiente para la transaccion y recibe el sueldo en una variable int
+		private static void clave(int valor) {
+>>>>>>> master
 			if(Usuario.lista.get(cedula).getsueldo()>=valor) {
 				validarclave();
 			}
@@ -1115,7 +1178,7 @@ private static void clave(int valor) {
 			
 		}
 
-	
+	//?
 		private static void Sletras(JTextField clave1) {
 			clave1.addKeyListener(new KeyAdapter() {
 				public void keyTyped(KeyEvent e) {
@@ -1185,6 +1248,7 @@ private static void validarclave() {
 			clave1.addKeyListener(new KeyAdapter() {
 				
 				public void keyTyped(KeyEvent e) {
+					//metodo que impide que se ingresen datos por teclado a la caja de texto
 					char c=e.getKeyChar();
 					if (Character.isLetter(c)|| Character.isDigit(c)) {				
 			            e.consume();
@@ -1193,10 +1257,6 @@ private static void validarclave() {
 			});
 			clavevalidar="";
 			clave1.setText("");
-			
-	
-			
-
 			
 			continuar=new JButton();
 			continuar.setText("CONTINUAR");
@@ -1212,6 +1272,7 @@ private static void validarclave() {
 			
 			// en este llamo el boton limpiar para que me quede limpio el jtextfield
 			limpiar.addActionListener(new ActionListener() {
+				//metodo que lee uel boton y limpia los datos que el usuario ingreso a la pantalla
 				public void actionPerformed(ActionEvent e) {
 				clavevalidar="";
 				clave1.setText(null);
@@ -1220,6 +1281,7 @@ private static void validarclave() {
 			
 			// en continuar:
 			continuar.addActionListener (new ActionListener(){
+				//metodo que lee el boton y de acuerdo a lo seleccionado por el usaurio ejecuta una operacion
 				public void actionPerformed(ActionEvent e){
 					//Si es retiro aqui me llama el metodo para mostrar imagenes 
 					if(a==1) {
@@ -1409,8 +1471,13 @@ private static void validarclave() {
 					contenido.gridx = 2;
 					contenido.gridy = 3;
 					VentanaJFrame.panelCentro.add(clave1,contenido);
+<<<<<<< HEAD
 					//validar letras 
 					clave1.addKeyListener(new KeyAdapter() {					
+=======
+					clave1.addKeyListener(new KeyAdapter() {
+						//metodo que impide que se ingrese datos por teclado a la caja de texto
+>>>>>>> master
 						public void keyTyped(KeyEvent e) {
 							char c=e.getKeyChar();
 							if (Character.isLetter(c)|| Character.isDigit(c)) {				
@@ -1432,7 +1499,9 @@ private static void validarclave() {
 					contenido.gridy = 4;
 					VentanaJFrame.panelCentro.add(continuar12,contenido);
 					continuar12.addActionListener (new ActionListener(){	
+						//metodo que luego de leer el boton ejecuta el cambio de clave de acuerdo a su validez
 						public void actionPerformed(ActionEvent e){
+<<<<<<< HEAD
 						
 						er=0;
 						//este try es por si la clave esta vacia 
@@ -1450,6 +1519,10 @@ private static void validarclave() {
 						//si no se cumple la condicion
 						else {
 						//creo una variable entera llamada nueva aqui almacena la nueva clave
+=======
+													
+						etiqueta52.setText("CAMBIO DE CLAVE EXITOSO");
+>>>>>>> master
 						int nueva=Integer.parseInt(clave1.getText());
 						//aqui llamo la lista segun la cedula es la posicion de la lista en la que se encuentra y hay le mando el nuevo valor
 						Usuario.lista.get(cedula).setclave(nueva);
@@ -1474,37 +1547,50 @@ private static void validarclave() {
 					
 					// limpia las cajas de texto
 					limpiar.addActionListener(new ActionListener() {
+						//metodo que lee el boton y limpia los datos del usuario ingresados en pantalla
 						public void actionPerformed(ActionEvent e) {
 							clavevalidar="";
 							clave1.setText(null);
 						}
 
 					});
+<<<<<<< HEAD
 					}catch(java.lang.NumberFormatException sd) {
 						JOptionPane.showMessageDialog(null, "La clave esta vacia", "error", JOptionPane.ERROR_MESSAGE); 
 					}
 					}		
 			
+=======
+				}		
+				boton01.addActionListener (new ActionListener(){
+					//metodo que devuelve al usuario al menu principal luego de leer el boton
+					public void actionPerformed(ActionEvent e){
+						ingresar(1);
+					}});
+						
+				
+				
+>>>>>>> master
 				}
 			});
 			
 			}
 			catch(java.lang.NullPointerException a) {
 				
-			}
-			
-		
-
-
-			
 		}
+	}
 		
+<<<<<<< HEAD
 		
 	/**
 	 * Metodo para realizar los pagos
 	 * @param limpiar boton para limpiar datos de las cajas de texto
 	 */
 private static void realizarpagos() {
+=======
+		//metodo vacio que hace la operacion de pagos 
+		private static void realizarpagos() {
+>>>>>>> master
 			a=6;
 			VentanaJFrame.panelCentro.removeAll();
 			VentanaJFrame.panelCentro.repaint();
@@ -1559,8 +1645,14 @@ private static void realizarpagos() {
 			contenido.gridx = 2;
 			contenido.gridy = 2;
 			VentanaJFrame.panelCentro.add(numeropag, contenido);
+<<<<<<< HEAD
 			//Aqui valido los datos numericos del jtesfield
 			numeropag.addKeyListener(new KeyAdapter() {					
+=======
+			
+			numeropag.addKeyListener(new KeyAdapter() {	
+				//metodo que imprime un mesaje de error luego de que se intente ingresar datos por teclado que no sean alfabeticos
+>>>>>>> master
 				public void keyTyped(KeyEvent e) {
 					char c=e.getKeyChar();
 					if (Character.isLetter(c)) {
@@ -1584,8 +1676,14 @@ private static void realizarpagos() {
 			contenido.gridx = 2;
 			contenido.gridy = 3;
 			VentanaJFrame.panelCentro.add(valorpag, contenido);
+<<<<<<< HEAD
 			//Valido que solo me ingresen datos numericos
 			valorpag.addKeyListener(new KeyAdapter() {					
+=======
+			
+			valorpag.addKeyListener(new KeyAdapter() {		
+				//metodo que imprime un mesaje de error luego de que se intente ingresar datos por teclado que no sean numericos
+>>>>>>> master
 				public void keyTyped(KeyEvent e) {
 					char c=e.getKeyChar();
 					if (Character.isLetter(c)) {
@@ -1605,6 +1703,7 @@ private static void realizarpagos() {
 			VentanaJFrame.panelCentro.add( continuar2,contenido);
 			//cuando doy clic en el boton de continuar
 			continuar2.addActionListener (new ActionListener(){
+				//metodo que lee el boton, guarda los datos y ejecuta el pago 
 				public void actionPerformed(ActionEvent e){
 					//aqui valido los campos en blanco y la seleccion del selector
 					try {
@@ -1631,6 +1730,7 @@ private static void realizarpagos() {
 		});
 //Aqui borro las cajas de texto existentes en ese momento en el panel del centro
 			limpiar.addActionListener(new ActionListener() {
+				//metodo lee el boton y limpiea lo ingresado por el usario en pantalla
 				public void actionPerformed(ActionEvent e) {
 					numeropag.setText(null);
 					valorpag.setText(null);
@@ -1639,12 +1739,17 @@ private static void realizarpagos() {
 
 			});
 		}
+<<<<<<< HEAD
 		
 /**
  * Metodo para transferir dinero
  * el boton continuar14 me permite continuar y validar la informacion ingresada
  */
 private static void transferir() {
+=======
+		// metodo vacio que ejecuta la transaccion transferir 
+		private static void transferir() {
+>>>>>>> master
 			a=5;
 			//
 			VentanaJFrame.panelCentro.removeAll();
@@ -1664,9 +1769,7 @@ private static void transferir() {
 			contenido.gridx = 0;
 			contenido.gridy = 0;
 			VentanaJFrame.panelCentro.add(etiqueta42, contenido);
-			
-			
-			
+						
 			JLabel etiqueta = new JLabel("NOMBRE ");
 			etiqueta.setForeground(Color.BLACK);
 			contenido.fill = GridBagConstraints.HORIZONTAL;
@@ -1686,6 +1789,7 @@ private static void transferir() {
 			//Aqui valido que el nombre solo sea letras
 			nombretra.addKeyListener(new KeyAdapter() {					
 				public void keyTyped(KeyEvent e) {
+					//metodo que imprime un mesaje de error luego de que se intente ingresar datos por teclado que no sean alfabeticos
 					char c=e.getKeyChar();
 					if (Character.isDigit(c)) {
 						JOptionPane.showMessageDialog(null, "Solo se admiten datos alfabeticos", "error", JOptionPane.ERROR_MESSAGE); 
@@ -1710,8 +1814,14 @@ private static void transferir() {
 			contenido.gridx = 2;
 			contenido.gridy = 2;
 			VentanaJFrame.panelCentro.add(ncuenta, contenido);
+<<<<<<< HEAD
 			// En este valido que el numero de cuenta solo sean datos numericos
 			ncuenta.addKeyListener(new KeyAdapter() {					
+=======
+			
+			ncuenta.addKeyListener(new KeyAdapter() {		
+				//metodo que imprime un mesaje de error luego de que se intente ingresar datos por teclado que no sean numericos
+>>>>>>> master
 				public void keyTyped(KeyEvent e) {
 					char c=e.getKeyChar();
 					if (Character.isLetter(c)) {
@@ -1720,9 +1830,14 @@ private static void transferir() {
 			             }
 				}
 			});
+<<<<<<< HEAD
 			
 			
 			JLabel etiqueta3 = new JLabel("VALOR A TRANSFERIR ");
+=======
+
+			JLabel etiqueta3 = new JLabel("VALOR DEL PAGO: ");
+>>>>>>> master
 			etiqueta3.setForeground(Color.BLACK);
 			contenido.fill = GridBagConstraints.HORIZONTAL;	
 			contenido.gridx = 1;
@@ -1759,6 +1874,7 @@ private static void transferir() {
 			});
 			// Aqui es cuando escucha el boton de continuar con la operacion
 			continuar14.addActionListener (new ActionListener(){
+				//metodo que escucha el boton y realiza el pago leyendo los datos
 				public void actionPerformed(ActionEvent e){
 					try {
 					//Aqui valido que alla seleccionado algun valor 
@@ -1795,10 +1911,14 @@ private static void transferir() {
 			
 		
 		}
+<<<<<<< HEAD
 		
 /**
  * Metodo para indicar que la transaccion ha sido exitosa
  */
+=======
+		//metodo que imprime el mensaje de transaccion exitosa luego de alguna
+>>>>>>> master
 		public static void transaccionExitosa() {
 			//imprimo que la transaccion ha sido exitosa 
 			 etiqueta52.setText("..transaccion exitosa!.........");
@@ -1879,13 +1999,15 @@ private static void transferir() {
 			   AudioClip clip = Applet.newAudioClip(url);
 			    clip.play(); 
 			   
-			  continuar12.addActionListener (new ActionListener(){   
+			  continuar12.addActionListener (new ActionListener(){
+				 //metodo que escucha el boton y lleva al menu principal del usuario
 			    public void actionPerformed(ActionEvent e){ 
 			    //este ingresar es para volver al menu
 			    ingresar(1); 
 			       
 			  }}); 
-			  salir1.addActionListener (new ActionListener(){   
+			  salir1.addActionListener (new ActionListener(){
+				 //metodo que escucha el boton y sale del usuario en curso
 			    public void actionPerformed(ActionEvent e){ 
 			    // llamo a la funcion salir del cajero
 			    salir(); 

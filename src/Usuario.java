@@ -24,7 +24,7 @@ import javax.swing.WindowConstants;
 class Usuario extends JFrame{
 // creo un arraylist donde me guarda los datos de los usuarios
 static List<Persona> lista;
-static int ban=0;
+static int ban=0,user;
 static String nombresuser;
 	// inicializo el JFrame y sus componentes
 	public Usuario(String titulo) {
@@ -175,8 +175,13 @@ static String nombresuser;
 	
 		//Una vez escucha este boton me guarda los datos en el array list ademas me valida que ningun campo quede vacio
            boton21.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){  
-				int user=Integer.parseInt(cedula.getText());
+			public void actionPerformed(ActionEvent e){ 			
+				ban=0;
+				try {
+				user=Integer.parseInt(cedula.getText());
+				}catch(java.lang.NumberFormatException sd) {
+					user=0;
+				}
 				for(int i=0;i<lista.size();i++) {
 					System.out.println("ENTRO"+i);
 					if(user==lista.get(i).getcedula()) {

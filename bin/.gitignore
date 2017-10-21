@@ -57,6 +57,7 @@
 /PanelAbajo$23.class
 /PanelAbajo$24.class
 /PanelAbajo$25.class
+<<<<<<< HEAD
 /PanelAbajo$3.class
 /PanelAbajo$30.class
 /PanelAbajo$33.class
@@ -66,3 +67,18 @@
 /PanelAbajo$31$4.class
 /PanelAbajo$31$5.class
 /PanelAbajo$41.class
+=======
+/PanelAbajo$26.class
+/PanelAbajo$26$1.class
+/PanelAbajo$27.class
+/PanelAbajo$28.class
+/PanelAbajo$29.class
+/PanelAbajo$30.class
+/PanelAbajo$26$2.class
+/PanelAbajo$27$1.class
+/PanelAbajo$27$2.class
+/PanelAbajo$27$3.class
+/PanelAbajo$31.class
+/PanelAbajo$32.class
+/PanelAbajo$33.class
+>>>>>>> master

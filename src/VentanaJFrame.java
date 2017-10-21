@@ -41,9 +41,6 @@ public class VentanaJFrame extends JFrame {
 	
 	//Metodo que coloca cada JPanel en la ubicacion dada segun su setLayout
 	public void componente() {
-		
-	
-		
 		panelArriba = new PanelArriba( );
         add(panelArriba, BorderLayout.NORTH);
 

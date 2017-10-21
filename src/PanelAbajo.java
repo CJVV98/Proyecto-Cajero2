@@ -28,7 +28,7 @@ public class PanelAbajo extends JPanel {
 	static Usuario usuario;
     static JButton btnOpcion1,registrar2,limpiar,registrar16,boton1,boton2,boton3,boton4,boton5,boton6,boton7,boton8,boton9,boton02,boton01,continuar,salir,cancelar,continuar1,continuar12;
     static JLabel etiqueta52,saldo1,foto112;
-	static int bandera=0,cedula,valor,claveerronea=0,b=0,i,a=0,contador=0,validar=1,bandera1=0,validar2=0,validar3=0;
+	static int bandera=0,cedula,valor,claveerronea=0,b=0,i,a=0,contador=0,validar=1,bandera1=0,validar2=0,validar3=0,er=0;
 	//a es una bandera que me indica en que operacion esta
 	// por ejemplo 0 indica que no ha ingresado a cajero
 	// 1 retiro, 2 consulta, 3 cambio de clave, 5 transacciones, 6 pagos
@@ -497,7 +497,7 @@ public static void salir() {
 		validar2=0;
 		validar3=0;
 		Principal.obj1.setVisible(false);
-		cajadetexto.setText(null);
+		cajadetexto.setText("");
 		Principal.ventananuev();		
 		a=0;
 		
@@ -506,23 +506,29 @@ public static void salir() {
 		
 		
 	}
-	
+	//Este metodo me recorre la lista y me la valida segun el usuario
 	public static boolean validarUsuario() {
+	validar2=0;
+	validar3=0;
 	
 		System.out.println("lista validar"+Usuario.lista.size());
 		for(int i=0;i<Usuario.lista.size();i++) {			
+			try {
 			
 				if(Usuario.lista.get(i).getcedula()==Integer.parseInt(cajadetexto.getText())) {
 					
 					System.out.println("esta aqui la cc "+cajadetexto.getText());
 					validar2++;
 					cedula=i;
-					
+					System.out.println("La cedula pasor"+validar2);
 					
 				}
 				else {
 					validar3++;					
 				}
+			}catch(java.lang.NumberFormatException sd){
+					validar3++;
+			}
 		}
 	
 		
@@ -534,18 +540,19 @@ public static void salir() {
 			if(validar3==Usuario.lista.size()) {
 			bandera=3;
 			val= false;
-			sonido.play();
+		
 			System.out.println("FALSO");
 		}}
 		return val;
 	}
 	
-	
+	//aqui recibe un valor que es segun el ingresar del usuario ademas valida datos
 	public static void ingresar(int rec) {
 		cancelar.setEnabled(true);
 		 salir.setEnabled(true);
 		try {
-			
+			// aqui llama la funcion validar cedula
+	
 			if(validarUsuario()==false) {
 				if(bandera==3) {
 					etiqueta52.setText("Procesando información.");
@@ -571,6 +578,8 @@ public static void salir() {
 			etiqueta52.setText("BIENVENIDO");
 			 
 				if(bandera==1) {
+					
+					//repintamos el panel del centro aqui ponemos las operaciones a realizar
 					etiqueta52.setText("BIENVENIDO "+Usuario.lista.get(i).getNombre());
 					VentanaJFrame.panelCentro.removeAll();
 					VentanaJFrame.panelCentro.repaint();
@@ -704,7 +713,7 @@ public static void salir() {
 					contenido.gridy = 3;
 					VentanaJFrame.panelBusqueda.add(registrar12, contenido);
 					
-	
+					//aqui es cuando el usuario selecciona algun boton de la operacion
 					VentanaJFrame.panelFormulario.retiroef.addActionListener (new ActionListener(){
 						public void actionPerformed(ActionEvent e){
 							retiro();
@@ -755,7 +764,7 @@ public static void salir() {
 		}
 	}
 	
-	
+	// Realizo el retiro de dinero
 	private static void retirodinero() {
 		System.out.println("Retiro 2");
 		VentanaJFrame.panelBusqueda.removeAll();
@@ -764,12 +773,13 @@ public static void salir() {
 		VentanaJFrame.panelFormulario.repaint();
 		etiqueta52.setText("-");
 		int velocidad=2;
-	
+		//Es la velocidad del tic
 		int velocidad2=velocidad*1000;
-		
+		// es una funcion que regula los tiempos
 		time2 = new TimerTask() {
 			int tic = 0;
 			@Override
+			//aqui empieza a correr el tiempo y a ejecutar los tiempos
 			public void run() {
 				if(tic==0) {
 					VentanaJFrame.panelCentro.removeAll();
@@ -840,15 +850,17 @@ public static void salir() {
 						
 			}
 		};
-		
+		// cada tic es cada vez que recorre
 		timer12=new Timer();
 		timer12.schedule(time2, 0,3500);
-		
+		// aqui indico que empieza desde 0 y va a una velocidad de 3500
 		
 	
 		
 		
 	}
+	
+	//Aqui realizo el usuario escoge la suma a retirar
 	private static void retiro() {
 		a=1;
 		VentanaJFrame.panelCentro.removeAll();
@@ -994,7 +1006,7 @@ public static void salir() {
 		contenido.gridx = 1;
 		contenido.gridy = 3;
 		VentanaJFrame.panelFormulario.add(dos,contenido);
-				
+		// Aqui escucha los valores a retirar los guarda en una variable y los envia a una funcion		
 		dos.addActionListener (new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				valor=200000;
@@ -1032,7 +1044,7 @@ public static void salir() {
 	});
 	}
 	
-	
+	//Aqui valida si el saldo del usuario es mayor al solicitado
 		private static void clave(int valor) {
 			if(Usuario.lista.get(cedula).getsueldo()>=valor) {
 				validarclave();
@@ -1053,7 +1065,7 @@ public static void salir() {
 			             }
 				}
 			});}
-		
+	//Aqui repinto el panel de centro y creo un formulario para la clave
 		private static void validarclave() {
 			validar=1;
 		
@@ -1094,7 +1106,7 @@ public static void salir() {
 			contenido.gridx = 2;
 			contenido.gridy = 2;	
 			VentanaJFrame.panelCentro.add(clave2,contenido);
-
+			// aqui es donde me ingresa la clave 
 			clave1 = new JPasswordField();
 			Sletras(clave1);
 			contenido.weighty = 0.3;
@@ -1102,6 +1114,7 @@ public static void salir() {
 			contenido.gridx = 2;
 			contenido.gridy = 3;
 			VentanaJFrame.panelCentro.add(clave1,contenido);
+			//este metodo me valida que solo me ingrese datos
 			clave1.addKeyListener(new KeyAdapter() {
 				
 				public void keyTyped(KeyEvent e) {
@@ -1130,7 +1143,7 @@ public static void salir() {
 
 			claveerronea=0;
 			
-			
+			// en este llamo el boton limpiar para que me quede limpio el jtextfield
 			limpiar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				clavevalidar="";
@@ -1138,9 +1151,10 @@ public static void salir() {
 				}
 			});
 			
-			
+			// en continuar:
 			continuar.addActionListener (new ActionListener(){
 				public void actionPerformed(ActionEvent e){
+					//Si es retiro aqui me llama el metodo para mostrar imagenes 
 					if(a==1) {
 					
 					if(Usuario.lista.get(cedula).getclave()==Integer.parseInt(clavevalidar)){
@@ -1158,16 +1172,16 @@ public static void salir() {
 						contenido.gridx = 0;
 						contenido.gridy = 0;	
 						VentanaJFrame.panelCentro.add(q,contenido);			
-						
-						System.out.println("Retiro 1");
+						// llamo el metodo retirodinero
 						retirodinero();
-						System.out.println("Retiro 3");
+
 						
 						
 					
 					
 				
 					}
+					//si la clave es incorrecta me hace un acumulador hasta 3 vece no me deja digitar mas
 					else {
 						
 						claveerronea++;
@@ -1179,7 +1193,7 @@ public static void salir() {
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "Ya ha superado el numero de intentos", "error", JOptionPane.ERROR_MESSAGE); 
-							salir();//AQUI QUIERO QUE SALGA?
+							salir();//Aqui me va al metodo salir debido a que se le acabaron las oportunidades de ingreso
 						}
 					}
 				}
@@ -1216,11 +1230,11 @@ public static void salir() {
 						}
 					}
 				if(a==2) {
-				
+				try {
 					if(Usuario.lista.get(cedula).getclave()==Integer.parseInt(clavevalidar)){
 							VentanaJFrame.panelCentro.removeAll();
 							VentanaJFrame.panelCentro.repaint();
-							etiqueta52.setText("Consultando Informacion");
+							etiqueta52.setText("CONSULTANDO INFORMACION");
 							JLabel saldo = new JLabel();
 							saldo.setText("SU SALDO ES:  "+"     $"+Usuario.lista.get(cedula).getsueldo());
 							saldo.setFont(new java.awt.Font("Tahoma", 1, 16));
@@ -1269,9 +1283,13 @@ public static void salir() {
 							salir();//AQUI QUIERO QUE SALGA?
 						}
 					}
-					
+				}catch(java.lang.NumberFormatException sd) {
+					JOptionPane.showMessageDialog(null, "La clave esta vacia", "error", JOptionPane.ERROR_MESSAGE); 
+				}
 				}
 				if(a==3) {
+					try {
+					er=0;
 					if(Usuario.lista.get(cedula).getclave()==Integer.parseInt(clavevalidar)){
 					clavevalidar="";
 					clave1.setText("");
@@ -1329,7 +1347,8 @@ public static void salir() {
 					clavevalidar="";
 					clave1.setText("");
 					
-	
+			
+				
 					
 					continuar12=new JButton();
 					continuar12.setText("CONTINUAR");
@@ -1342,16 +1361,22 @@ public static void salir() {
 					VentanaJFrame.panelCentro.add(continuar12,contenido);
 					continuar12.addActionListener (new ActionListener(){	
 						public void actionPerformed(ActionEvent e){
+						er=0;
+						try {
+						int nuevaaux=Integer.parseInt(clave1.getText());
+						}catch(java.lang.NumberFormatException sd) {
+							er=1;
 							
-							
-						etiqueta52.setText("CAMBIO DE CLAVE EXITOSO");
+						}
+						if(er==1) {
+							JOptionPane.showMessageDialog(null, "La nueva clave esta vacia", "error", JOptionPane.ERROR_MESSAGE);
+						}
+						else {
+						
 						int nueva=Integer.parseInt(clave1.getText());
 						Usuario.lista.get(cedula).setclave(nueva);
-						try {
-						      Thread.sleep(1000);
-						} catch (InterruptedException sd) {}
-						ingresar(1);
-							
+						cambioexitoso();
+						}	
 					}});
 					}else {
 						claveerronea++;
@@ -1376,7 +1401,10 @@ public static void salir() {
 						}
 
 					});
-				}		
+					}catch(java.lang.NumberFormatException sd) {
+						JOptionPane.showMessageDialog(null, "La clave esta vacia", "error", JOptionPane.ERROR_MESSAGE); 
+					}
+					}		
 				boton01.addActionListener (new ActionListener(){
 					
 					public void actionPerformed(ActionEvent e){
@@ -1779,7 +1807,95 @@ public static void salir() {
 	
 			} 
 			   
+		public static void cambioexitoso() {
+			
+		
+			 cancelar.setEnabled(false);
+			 salir.setEnabled(false);
+			  VentanaJFrame.panelCentro.removeAll(); 
+			  VentanaJFrame.panelCentro.repaint(); 
+			  VentanaJFrame.panelBusqueda.removeAll(); 
+			  VentanaJFrame.panelBusqueda.repaint(); 
+			  VentanaJFrame.panelFormulario.removeAll(); 
+			  VentanaJFrame.panelFormulario.repaint(); 
+			  etiqueta52.setText("CAMBIO DE CLAVE EXITOSO");
+			 
+			  etiqueta52.setText("CAMBIO DE CLAVE EXITOSO..");
+			
 
+			   
+			  JLabel q1 = new JLabel(); 
+			  q1.setText("                  "); 
+			  q1.setFont(new java.awt.Font("Tahoma", 1, 16)); 
+			  contenido.weighty = 0.3; 
+			  contenido.weightx = 34; 
+			  contenido.gridx = 3; 
+			  contenido.gridy = 1;   
+			  VentanaJFrame.panelCentro.add(q1,contenido); 
+			   
+			  JLabel q = new JLabel(); 
+			  q.setText("                    "); 
+			  q.setFont(new java.awt.Font("Tahoma", 1, 16)); 
+			  contenido.weighty = 0.3; 
+			  contenido.weightx = 22; 
+			  contenido.gridx = 0; 
+			  contenido.gridy = 1;   
+			  VentanaJFrame.panelCentro.add(q,contenido); 
+			   
+			  JLabel clave3 = new JLabel(); 
+			  clave3.setText("SU CLAVE HA SIDO MODIFICADA CON EXITO");
+			  clave3.setFont(new java.awt.Font("Tahoma", 1, 16)); 
+			  contenido.weighty = 0.3; 
+			  contenido.weightx = 1; 
+			  contenido.gridx = 2; 
+			  contenido.gridy = 2;   
+			  VentanaJFrame.panelCentro.add(clave3,contenido); 
+			 
+			  continuar12=new JButton(); 
+			  continuar12.setText("MENU PRINCIPAL"); 
+			  continuar12.setForeground(Color.WHITE); 
+			  continuar12.setBackground(Color.red); 
+			  contenido.weighty = 0.3; 
+			  contenido.weightx = 0.5; 
+			  contenido.gridx = 1; 
+			  contenido.gridy = 4; 
+			  VentanaJFrame.panelCentro.add(continuar12,contenido); 
+			   
+			  JLabel q3 = new JLabel(); 
+			  q3.setText("-------------------------------------------------"); 
+			  q3.setForeground(Color.orange);
+			  q3.setFont(new java.awt.Font("Tahoma", 1, 16)); 
+			  contenido.weighty = 1; 
+			  contenido.weightx = 2; 
+			  contenido.gridx = 2; 
+			  contenido.gridy = 4;   
+			  VentanaJFrame.panelCentro.add(q3,contenido); 
+			   
+			  JButton salir1 = new JButton(); 
+			  salir1.setText("SALIR"); 
+			  salir1.setForeground(Color.WHITE); 
+			  salir1.setBackground(Color.red); 
+			  contenido.weighty = 0; 
+			  contenido.weightx = 0; 
+			  contenido.gridx = 4; 
+			  contenido.gridy = 4; 
+			  VentanaJFrame.panelCentro.add(salir1,contenido); 
+			  
+			
+			   
+			  continuar12.addActionListener (new ActionListener(){   
+			    public void actionPerformed(ActionEvent e){ 
+			    ingresar(1); 
+			       
+			  }}); 
+			  salir1.addActionListener (new ActionListener(){   
+			    public void actionPerformed(ActionEvent e){ 
+			    salir(); 
+			       
+			  }}); 
+			  
+	
+			} 
 		
 		
 		

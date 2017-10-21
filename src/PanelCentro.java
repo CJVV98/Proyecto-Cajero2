@@ -11,7 +11,7 @@ import javax.swing.border.Border;
 
 public class PanelCentro extends JPanel {
 	static GridBagConstraints contenido;
-
+//Creo un Jpanel Central donde ubico una imagen alusiva a una tarjeta
 	  public PanelCentro() {
 		  
 			Border borde = BorderFactory.createTitledBorder( " " );
@@ -19,7 +19,7 @@ public class PanelCentro extends JPanel {
             setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.ORANGE));
 			setLayout(new GridBagLayout());
 			contenido = new GridBagConstraints();
-		  
+			//creo un Jlabel con un mensaje de bienvenida
 			JLabel etiqueta = new JLabel(" BIENVENIDO A CAJERO UDEC ");
 			etiqueta.setForeground(Color.BLACK);
 			etiqueta.setFont(new java.awt.Font("Tahoma", 1, 19));
@@ -29,7 +29,7 @@ public class PanelCentro extends JPanel {
 			contenido.gridx = 1;
 			contenido.gridy = 0;
 			add(etiqueta, contenido);
-			
+			//inserto una imagen de una tarjeta para indicar el ingreso de tarjeta
 			ImageIcon imagen = new ImageIcon( "images/tarjeta.png");		
 			JLabel foto = new JLabel(imagen);
 			contenido.fill = GridBagConstraints.HORIZONTAL;
@@ -38,7 +38,7 @@ public class PanelCentro extends JPanel {
 			contenido.gridx = 0;
 			contenido.gridy = 0;
 			add(foto, contenido);
-			
+			//JLabel con un mensaje al ingreso de tarjeta
 			JLabel etiqueta45 = new JLabel(" INSERTE SU TARJETA ");
 			etiqueta45.setForeground(Color.BLACK);
 			etiqueta45.setFont(new java.awt.Font("Tahoma", 1, 11));

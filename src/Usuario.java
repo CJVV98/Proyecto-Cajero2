@@ -3,6 +3,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +18,15 @@ import javax.swing.WindowConstants;
 
 /**
  *
- * @author Leo
+ * @author Johan
  */
+//Creo la clase usuario
 class Usuario extends JFrame{
+// creo un arraylist donde me guarda los datos de los usuarios
 static List<Persona> lista;
-
+static int ban=0;
 static String nombresuser;
-	
+	// inicializo el JFrame y sus componentes
 	public Usuario(String titulo) {
 		super(titulo);
 		
@@ -32,7 +36,7 @@ static String nombresuser;
 		this.pack();
 		this.setVisible(true);
 	}
-	
+	//Diseño del JFrame
 	private Usuario iniciar() {
 		JFrame frame=new JFrame();
 		
@@ -44,10 +48,10 @@ static String nombresuser;
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		return this;
 	}
-	
+	//Configuro los componentes que van a ir en el JFrame
 	private  void configurarComponentes() {
+		//instancio la lista
 		
-		lista = new ArrayList<Persona>(); 
 		
 		Container contentPane = this.getContentPane();
 		contentPane.setBackground(Color.orange);
@@ -58,13 +62,14 @@ static String nombresuser;
 		etiqueta2.setBounds(200, 0, 150, 100);
 		contentPane.add(etiqueta2);
 		
-		
+		// ingreso una imagen de decoracion 
 		ImageIcon imagen = new ImageIcon( "images/usuarios.png");		
 		JLabel foto = new JLabel(imagen);
 		foto.setBounds(450,20, 100, 123);
 		contentPane.add(foto);
 		
-		
+		//Aqui solicito desde la linea 72 a la 169 solicito los datos de usuario como cedula,nombre, apellido, saldo y clave
+		//Ademas los valido con un KeyListener 
 		JLabel etiqueta5 = new JLabel("N° DE CEDULA: ");
 		etiqueta5.setForeground(Color.black);
 		etiqueta5.setBounds(10, 45, 100, 50);
@@ -74,6 +79,16 @@ static String nombresuser;
 		cedula .setText("");
 		cedula .setBounds(120, 65,290, 20);
 		contentPane.add(cedula);
+		
+		cedula.addKeyListener(new KeyAdapter() {					
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if (Character.isLetter(c)) {
+					JOptionPane.showMessageDialog(null, "Solo se admiten datos numericos", "error", JOptionPane.ERROR_MESSAGE); 
+		            e.consume();
+		             }
+			}
+		});
 		
 		
 		JLabel etiqueta = new JLabel("NOMBRE: ");
@@ -86,6 +101,16 @@ static String nombresuser;
 		cajadetexto.setBounds(120,95,290, 20);
 		contentPane.add(cajadetexto);
 		
+		cajadetexto.addKeyListener(new KeyAdapter() {					
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if (Character.isDigit(c)) {	
+					JOptionPane.showMessageDialog(null, "Solo se admiten letras", "error", JOptionPane.ERROR_MESSAGE); 
+		            e.consume();
+		             }
+			}
+		});
+		
 		JLabel etiqueta1 = new JLabel("APELLIDO: ");
 		etiqueta1.setForeground(Color.black);
 		etiqueta1.setBounds(10, 105, 90, 60);
@@ -95,15 +120,35 @@ static String nombresuser;
 		cajadetexto1.setBounds(120, 125,290, 20);
 		contentPane.add(cajadetexto1);
 		
+		cajadetexto1.addKeyListener(new KeyAdapter() {					
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if (Character.isDigit(c)) {	
+					JOptionPane.showMessageDialog(null, "Solo se admiten letras", "error", JOptionPane.ERROR_MESSAGE); 
+		            e.consume();
+		             }
+			}
+		});
+		
 		JLabel saldo = new JLabel("SUELDO: ");
 		saldo.setForeground(Color.black);
 		saldo.setBounds(10, 145, 90, 50);
 		contentPane.add(saldo);
 	
 		JTextField saldo1 = new JTextField();
-		saldo1.setText("");
+		saldo1.setText(null);
 		saldo1.setBounds(120, 165,290, 20);
 		contentPane.add(saldo1);
+		
+		saldo1.addKeyListener(new KeyAdapter() {					
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if (Character.isLetter(c)) {	
+					JOptionPane.showMessageDialog(null, "Solo se admiten datos numericos", "error", JOptionPane.ERROR_MESSAGE); 
+		            e.consume();
+		             }
+			}
+		});
 		
 		JLabel clave = new JLabel("CLAVE: ");
 		clave.setForeground(Color.black);
@@ -113,22 +158,54 @@ static String nombresuser;
 		JTextField clave1 = new JTextField();
 		clave1.setBounds(120, 195,290, 20);
 		contentPane.add(clave1);
+		
+		clave1.addKeyListener(new KeyAdapter() {					
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if (Character.isLetter(c)) {
+					JOptionPane.showMessageDialog(null, "Solo se admiten datos numericos", "error", JOptionPane.ERROR_MESSAGE); 
+		            e.consume();
+		             }
+			}
+		});
                 
         JButton boton21 = new JButton("ACEPTAR");
 		boton21.setBounds(210, 235, 130, 20);
 		contentPane.add(boton21);
-                boton21.addActionListener (new ActionListener(){
+	
+		//Una vez escucha este boton me guarda los datos en el array list ademas me valida que ningun campo quede vacio
+           boton21.addActionListener (new ActionListener(){
 			public void actionPerformed(ActionEvent e){  
+				int user=Integer.parseInt(cedula.getText());
+				for(int i=0;i<lista.size();i++) {
+					System.out.println("ENTRO"+i);
+					if(user==lista.get(i).getcedula()) {
+						System.out.println("ENTRO"+i);	
+						ban++;
+					}
+				}
 				try {
-                            if(cajadetexto.getText().equals("") || cajadetexto1.getText().equals("") || cedula.getText().equals("")|| saldo.getText().equals("") || clave.getText().equals("")) {
+                            if(cajadetexto.getText().equals("") || cajadetexto1.getText().equals("") || cedula.getText().equals("")|| saldo.getText().equals("") || clave.getText().equals("") ) {
 					JOptionPane.showMessageDialog(null, "Error por favor complete las casillas", "error", JOptionPane.ERROR_MESSAGE); 
+					 
 				}
                             else{
+                            	if(ban==1) {
+                           		 JOptionPane.showMessageDialog(null, "Este usuario ya se encuentra registrado", "error", JOptionPane.ERROR_MESSAGE); 
+                           		 cajadetexto.setText("");
+                           		 cajadetexto1.setText("");
+                           		 cedula.setText("");
+                           		 saldo1.setText("");
+                           		 clave1.setText("");}
+                            	else {
                 nombresuser=cajadetexto.getText()+" "+cajadetexto1.getText();
+                //instancio la lista de tipo persona
 				lista.add(new Persona(Integer.parseInt(cedula.getText()),cajadetexto.getText(),cajadetexto1.getText(),Float.parseFloat(saldo1.getText()),Integer.parseInt(clave1.getText()))); 
-				System.out.println(lista.get(0).getcedula());
+				System.out.println("LA LISTA"+lista.size());
+				// dispose para salir de la ventana
                                 dispose(); 
                                         } 
+                            }
 				}catch (java.lang.NumberFormatException s) {
 					JOptionPane.showMessageDialog(null, "Revisar los datos numericos", "error", JOptionPane.ERROR_MESSAGE); 
 				}
@@ -137,5 +214,9 @@ static String nombresuser;
 			}}
 		);
 }
+	
+
+	
+	
 
 }

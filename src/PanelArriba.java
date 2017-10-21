@@ -2,7 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class PanelArriba extends JPanel {
-	
+// Clase de tipo JPanel en la cual va una imagen del logo de nuestro cajero	
 	public PanelArriba() {
 		
 		    setLayout( new BorderLayout( ) );

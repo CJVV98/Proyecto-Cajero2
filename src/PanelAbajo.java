@@ -1,3 +1,5 @@
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -6,31 +8,52 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import java.net.URL;
+import java.util.TimerTask;
+import java.util.Timer;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 
 public class PanelAbajo extends JPanel {
-	 
+	//Creo variables de tipo estatico con el fin de acceder a cualquier metodo estatico 
 	static boolean val;
 	static Usuario usuario;
-    static JButton btnOpcion1,registrar2,registrar16,boton1,boton2,boton3,boton4,boton5,boton6,boton7,boton8,boton9,boton02,continuar,salir,cancelar,continuar1,continuar12;
-    static JLabel etiqueta52,saldo1;
-	static int bandera=0,cedula,valor,claveerronea=0;
-	static JTextField cajadetexto;
+    static JButton btnOpcion1,registrar2,limpiar,registrar16,boton1,boton2,boton3,boton4,boton5,boton6,boton7,boton8,boton9,boton02,boton01,continuar,salir,cancelar,continuar1,continuar12;
+    static JLabel etiqueta52,saldo1,foto112;
+	static int bandera=0,cedula,valor,claveerronea=0,b=0,i,a=0,contador=0,validar=1,bandera1=0,validar2=0,validar3=0;
+	//a es una bandera que me indica en que operacion esta
+	// por ejemplo 0 indica que no ha ingresado a cajero
+	// 1 retiro, 2 consulta, 3 cambio de clave, 5 transacciones, 6 pagos
 	static GridBagConstraints contenido;
-	static JTextField clave1,clave4,numeropag,valorpag,nombretra,ncuenta,valort;
-	static String clavevalidar="", clavevalidar1="";
-	static int b=0,i,a=1;
-	static String bcs;
+	static JPasswordField clave1;
+	static JTextField cajadetexto,clave4,numeropag,valorpag,nombretra,ncuenta,valort;
+	static String clavevalidar="", clavevalidar1="",bcs,vocales;
+	static ImageIcon imagen1;
+	//ImagenIcon es para insertar una imagen
+	static Timer timer12;
+	//esta funcion Timer me sirve para indicar el contenido que va a quedar detenido segun el instante de tiempo determinado
+	static TimerTask time2;
+	//TimerTask sirve para determinar la velocidad con la que se efecturan el cambio de imagenes
+	static AudioClip sonido;
+	//AudioClip es para insertar un audio
+	
 	
 	public PanelAbajo() {
+	//Una vez inicie el Jframe con la funcion java.applet.Applet.newAudioClip(getClass().getResource("/sonido2.wav")) determino el sonido que guardara la variable
+	//una vez obtenida la informacion le doy play para que suene
+	sonido=java.applet.Applet.newAudioClip(getClass().getResource("/sonido2.wav"));
+	sonido.play();
 	
+		
+		
 	Border borde = BorderFactory.createTitledBorder( "" );
     setBorder( borde );
 	setLayout(new GridBagLayout());
@@ -57,7 +80,7 @@ public class PanelAbajo extends JPanel {
 	add(etiqueta1, contenido);
 	
 	
-	
+	//Boton del 1
 	boton1 = new JButton();
 	boton1 .setBackground(Color.ORANGE);
 	boton1.setSize(5, 5);
@@ -70,7 +93,7 @@ public class PanelAbajo extends JPanel {
 	add(boton1 , contenido);
 	
 
-	
+	//Boton del 2
 	boton2  = new JButton();
 	boton2.setBackground(Color.ORANGE);
 	boton2.setSize(5, 5);
@@ -83,17 +106,18 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 1;
 	add(boton2, contenido);
 	
+	//Boton del 3
 	boton3  = new JButton();
 	boton3.setBackground(Color.ORANGE);
 	boton2.setSize(5, 5);
 	boton3.setText("3");
 	contenido.fill = GridBagConstraints.CENTER;
 	contenido.weighty = 0.3;
-
 	contenido.gridx = 3;
 	contenido.gridy = 1;
 	add(boton3, contenido);
 	
+	//Boton del 4
 	boton4  = new JButton();
 	boton4.setBackground(Color.ORANGE);
 	boton4.setText("4");
@@ -104,7 +128,7 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 2;
 	add(boton4, contenido);
 
-	
+	//Boton del 5
 	boton5  = new JButton();
 	boton5.setAlignmentX(CENTER_ALIGNMENT);
 	boton5.setBackground(Color.ORANGE);
@@ -116,6 +140,7 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 2;
 	add(boton5, contenido);
 	
+	//Boton del 6
 	boton6  = new JButton();
 	boton6.setBackground(Color.ORANGE);
 	boton6.setText("6");
@@ -126,6 +151,7 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 2;
 	add(boton6, contenido);
 	
+	//Boton del 7
 	boton7  = new JButton();
 	boton7.setBackground(Color.ORANGE);
 	boton7.setText("7");
@@ -136,6 +162,7 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 3;
 	add(boton7, contenido);
 	
+	//Boton del 8
 	boton8  = new JButton();
 	boton8.setBackground(Color.ORANGE);
 	boton8.setText("8");
@@ -146,6 +173,7 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 3;
 	add(boton8, contenido);
 	
+	//Boton del 9
 	boton9  = new JButton();
 	boton9.setBackground(Color.ORANGE);
 	boton9.setText("9");
@@ -156,6 +184,7 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 3;
 	add(boton9, contenido);
 	
+	//Boton del cancelar es decir me vuelve al inicio del cajero
 	cancelar = new JButton();
 	cancelar.setForeground(Color.WHITE);
 	cancelar.setBackground(Color.red);
@@ -167,7 +196,8 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 1;
 	add(cancelar, contenido);
 	
-	JButton limpiar = new JButton();
+	//limpiar me limpia las cajas de texto cuando el usuario lo desee
+	limpiar = new JButton();
 	limpiar.setForeground(Color.WHITE);
 	limpiar.setBackground(Color.red);
 	limpiar.setText("LIMPIAR");
@@ -178,6 +208,8 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 2;
 	add(limpiar, contenido);
 	
+	
+	//salir cierra la seccion del usuario
 	salir = new JButton();
 	salir.setForeground(Color.WHITE);
 	salir.setBackground(Color.red);
@@ -189,7 +221,7 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 3;
 	add(salir, contenido);
 
-	JButton boton01 = new JButton();
+	boton01 = new JButton();
 	boton01.setBackground(Color.ORANGE);
 	boton01.setText("#");
 	contenido.fill = GridBagConstraints.HORIZONTAL;
@@ -238,14 +270,8 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 8;
 	add(etiqueta12, contenido);
 	
-	etiqueta52 = new JLabel("MENSAJE ");
-	etiqueta52.setForeground(Color.BLACK);
-	contenido.fill = GridBagConstraints.HORIZONTAL;
-	contenido.weightx = 3;
-	contenido.weighty = 3;
-	contenido.gridx = 0;
-	contenido.gridy = 9;
-	add(etiqueta52, contenido);
+
+	
 	
 	
 	JLabel etiqueta13 = new JLabel("INGRESE SU TARJETA");
@@ -257,14 +283,25 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 6;
 	add(etiqueta13, contenido);
 	
+	//cajadetexto me guarda el numero de la tarjeta que es igual al numero de la cedula
 	cajadetexto = new JTextField();
-	cajadetexto.setText("CC");
+	cajadetexto.setText("");
 	contenido.fill = GridBagConstraints.HORIZONTAL;
 	contenido.weightx = 0.03;
 	contenido.gridx = 5;
 	contenido.gridy = 7;
 	add(cajadetexto, contenido);
+	cajadetexto.addKeyListener(new KeyAdapter() {					
+		public void keyTyped(KeyEvent e) {
+			char c=e.getKeyChar();
+			if (Character.isLetter(c)) {	
+				JOptionPane.showMessageDialog(null, "Solo se admiten datos numericos", "error", JOptionPane.ERROR_MESSAGE); 
+	            e.consume();
+	             }
+		}
+	});
 	
+	//este boton me permite acceder al cajero y a realizar operaciones
 	registrar2 = new JButton();
 	registrar2.setBackground(Color.ORANGE);
 	registrar2.setText(">>");
@@ -285,6 +322,9 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 8;
 	add(etiqueta14, contenido);
 	
+	
+	
+	//Este boton me permite agregar usuario
 	registrar16 = new JButton();
 	registrar16.setBackground(Color.ORANGE);
 	registrar16.setText("AGREGAR USUARIO");
@@ -296,6 +336,23 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 9;
 	add(registrar16, contenido);
 	
+	// en esta etiqueta iran los mensajes de cada operacion
+	etiqueta52 = new JLabel("MENSAJE ");
+	etiqueta52.setForeground(Color.BLACK);
+	contenido.fill = GridBagConstraints.HORIZONTAL;
+	contenido.weightx =3;
+	contenido.weighty = 3;
+	contenido.gridx = 0;
+	contenido.gridy = 9;
+	add(etiqueta52, contenido);
+	
+	
+	
+	
+	 // JTextArea en la fila 0, columna 0 y que ocupa dos filas y dos
+	 // columnas de ancho.
+
+	
 	JLabel registrar = new JLabel("");
 	contenido.fill = GridBagConstraints.HORIZONTAL;
 	contenido.ipady = 0;       //reset to default
@@ -304,26 +361,35 @@ public class PanelAbajo extends JPanel {
 	contenido.insets = new Insets(10,5,10,5);  //top padding
 	contenido.gridx = 6;       //aligned with button 2
 	contenido.gridwidth = 2;   //2 columns wide
-	contenido.gridy = 10;       //third row
+	contenido.gridy = 15;       //third row
 	add(registrar, contenido);
 	
+	// si escucha este boton accede al cajero 
 	registrar2.addActionListener (new ActionListener(){
-		public void actionPerformed(ActionEvent e){		
+		public void actionPerformed(ActionEvent e){	
 			ingresar(2);
 	}});
+	// cuando escucha este boton ingresa a un JFrame nuevo de tipo usuario donde compleatara unos datos de registro
 	registrar16.addActionListener (new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 			usuario = new Usuario("USUARIO");
+			
 	}});
+	// si escucha este boton una vez halla ingresado al cajero el me devuelve al inicio
 	cancelar.addActionListener (new ActionListener(){
-		public void actionPerformed(ActionEvent e){			
-			ingresar(1);
+		public void actionPerformed(ActionEvent e){	
+			if(a==1|| a==2 || a==3 || a==5 || a==6) {
+				ingresar(1);}
 	}});
+	
+	//salir es para salir totalmente del sistema
 	salir.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			a=0;
 			salir();
 	}});
-// Botones de teclado
+// Botones de teclado cuando escucha algun boton del teclado
+// me lo va guardando en una variable string y me lo va poniendo en una caja de texto llamada clave1
 	boton1.addActionListener (new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 		try {
@@ -423,87 +489,77 @@ public class PanelAbajo extends JPanel {
 });
 	
 }
-	
-	public static void salir() {
-		etiqueta52.setText(".");
-		VentanaJFrame.panelCentro.removeAll();
-		VentanaJFrame.panelCentro.repaint();
-		VentanaJFrame.panelBusqueda.removeAll();
-		VentanaJFrame.panelBusqueda.repaint();
-		VentanaJFrame.panelFormulario.removeAll();
-		VentanaJFrame.panelFormulario.repaint();
-		registrar2.setEnabled(false);
-		JLabel etiqueta = new JLabel(" BIENVENIDO A CAJERO UDEC ");
-		etiqueta.setForeground(Color.BLACK);
-		etiqueta.setFont(new java.awt.Font("Tahoma", 1, 19));
-		contenido.fill = GridBagConstraints.HORIZONTAL;
-		contenido.weightx = 0.03;
-		contenido.weighty = 0.03;
-		contenido.gridx = 1;
-		contenido.gridy = 0;
-		VentanaJFrame.panelCentro.add(etiqueta, contenido);
+
+//Este metodo es invocado cuando escucha el boton salir
+//aqui me pone en invisible la primera pantalla y me crea otra en donde caja de texto corresponde al numero de la tarjeta la dejamos null
+// para que se borre el ultimo numero de tarjeta ingresado
+public static void salir() {
+		validar2=0;
+		validar3=0;
+		Principal.obj1.setVisible(false);
+		cajadetexto.setText(null);
+		Principal.ventananuev();		
+		a=0;
 		
-		ImageIcon imagen = new ImageIcon( "images/tarjeta.png");		
-		JLabel foto = new JLabel(imagen);
-		contenido.fill = GridBagConstraints.HORIZONTAL;
-		contenido.weightx = 0.03;
-		contenido.weighty = 0.03;
-		contenido.gridx = 0;
-		contenido.gridy = 0;
-		VentanaJFrame.panelCentro.add(foto, contenido);
+
 		
-		JLabel etiqueta45 = new JLabel(" INSERTE SU TARJETA ");
-		etiqueta45.setForeground(Color.BLACK);
-		etiqueta45.setFont(new java.awt.Font("Tahoma", 1, 11));
-		contenido.fill = GridBagConstraints.HORIZONTAL;
-		contenido.weightx = 0.03;
-		contenido.weighty = 0.03;
-		contenido.gridx = 1;
-		contenido.gridy = 1;
-		VentanaJFrame.panelCentro.add(etiqueta45, contenido);
 		
 		
 	}
 	
 	public static boolean validarUsuario() {
-		for(int i=0;i<Usuario.lista.size();i++) {
-			try {
+	
+		System.out.println("lista validar"+Usuario.lista.size());
+		for(int i=0;i<Usuario.lista.size();i++) {			
+			
 				if(Usuario.lista.get(i).getcedula()==Integer.parseInt(cajadetexto.getText())) {
-					bandera=1;
+					
+					System.out.println("esta aqui la cc "+cajadetexto.getText());
+					validar2++;
 					cedula=i;
-					val= true;
-					System.out.println("VERDADERO");
+					
+					
 				}
 				else {
-					val= false;
-					System.out.println("FALSO");
+					validar3++;					
 				}
-			}
-			catch(java.lang.NumberFormatException sd) {
-				cajadetexto.setText("");
-				JOptionPane.showMessageDialog(null, "Ingrese solo numeros a este campo", "Error", JOptionPane.ERROR_MESSAGE); 
-			}
 		}
+	
+		
+		if(validar2==1) {
+			bandera=1;	
+			val= true;
+			System.out.println("VERDADERO");
+		}else {
+			if(validar3==Usuario.lista.size()) {
+			bandera=3;
+			val= false;
+			sonido.play();
+			System.out.println("FALSO");
+		}}
 		return val;
 	}
+	
+	
 	public static void ingresar(int rec) {
+		cancelar.setEnabled(true);
+		 salir.setEnabled(true);
 		try {
-			//bandera = rec;
-			System.out.println("0000."+bandera);
-			System.out.println("1111."+rec);
-			//while(validarUsuario()!=true){
-				System.out.println("00."+bandera);
-				System.out.println("11."+rec);
 			
 			if(validarUsuario()==false) {
-					etiqueta52.setText("Estamos procesando su transacción...");
+				if(bandera==3) {
+					etiqueta52.setText("Procesando información.");
 					rec = 0;
 					System.out.println("0."+bandera);
 					System.out.println("1."+rec);
 					cajadetexto.setText("");
-					JOptionPane.showMessageDialog(null, "El numero de la tarjeta es incorrecto", "Error", JOptionPane.ERROR_MESSAGE); 
-			}
-			else if(validarUsuario()==true) {
+					JOptionPane.showMessageDialog(null, "((!)El numero de la tarjeta es incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+					sonido.play();
+					etiqueta52.setText("Ingrese su tarjeta");
+				}			
+			}else {
+	
+			if(validarUsuario()==true) {
 				rec = 1;
 				System.out.println("2."+bandera);
 				System.out.println("3."+rec);
@@ -677,18 +733,124 @@ public class PanelAbajo extends JPanel {
 							
 					}});	
 				}
-			}
-		}
-				catch(java.lang.NullPointerException sd) {
-					
-						JOptionPane.showMessageDialog(null, "No se ha encontrado esta cedula", "error", JOptionPane.ERROR_MESSAGE); 
-			
-				}
 				
+			
+		}
+				
+		}
 						
 			
-}
+		}
+		catch(java.lang.NullPointerException sd) {
+			
+			etiqueta52.setText("Procesando información.");
+			rec = 0;
+			System.out.println("0."+bandera);
+			System.out.println("1."+rec);
+			cajadetexto.setText("");
+			JOptionPane.showMessageDialog(null, "No hay usuarios registrados", "Error", JOptionPane.ERROR_MESSAGE);
+			sonido.play();
+			etiqueta52.setText("Ingrese su tarjeta");				
+			sonido.play();
+		}
+	}
+	
+	
+	private static void retirodinero() {
+		System.out.println("Retiro 2");
+		VentanaJFrame.panelBusqueda.removeAll();
+		VentanaJFrame.panelBusqueda.repaint();
+		VentanaJFrame.panelFormulario.removeAll();
+		VentanaJFrame.panelFormulario.repaint();
+		etiqueta52.setText("-");
+		int velocidad=2;
+	
+		int velocidad2=velocidad*1000;
+		
+		time2 = new TimerTask() {
+			int tic = 0;
+			@Override
+			public void run() {
+				if(tic==0) {
+					VentanaJFrame.panelCentro.removeAll();
+					VentanaJFrame.panelCentro.repaint();
+					etiqueta52.setText("Procesando operacion");
+					JLabel q = new JLabel();
+					q.setText("				            ");
+					q.setFont(new java.awt.Font("Tahoma", 1, 16));
+					contenido.weighty = 0.3;
+					contenido.weightx = 22;
+					contenido.gridx = 0;
+					contenido.gridy = 0;	
+					VentanaJFrame.panelCentro.add(q,contenido);	
+					imagen1 = new ImageIcon("images/retiroplata.png");	
+					foto112 = new JLabel(imagen1);
+					foto112.setForeground(Color.BLACK);
+					contenido.fill = GridBagConstraints.HORIZONTAL;
+					contenido.weightx = 7;
+					contenido.weighty = 1;
+					contenido.gridx = 0;
+					contenido.gridy = 1;
+					VentanaJFrame.panelCentro.add(foto112, contenido);
+					etiqueta52.setText("PROCESANDO DATOS..");
+					System.out.println(tic);
+					etiqueta52.setText("PROCESANDO DATOS..");
+					
+					
+								
+				}
+				if(tic==1) {
+						VentanaJFrame.panelCentro.removeAll();
+						VentanaJFrame.panelCentro.repaint();
+						etiqueta52.setText("Procesando operacion");
+						JLabel q = new JLabel();
+						q.setText("				            ");
+						q.setFont(new java.awt.Font("Tahoma", 1, 16));
+						contenido.weighty = 0.3;
+						contenido.weightx = 22;
+						contenido.gridx = 0;
+						contenido.gridy = 0;	
+						VentanaJFrame.panelCentro.add(q,contenido);	
+						System.out.println(tic);
+						etiqueta52.setText("TRANSFERENCIA EXITOSA");		
+						ImageIcon imagen112 = new ImageIcon( "images/retiroplata2.png");		
+						foto112 = new JLabel(imagen112);
+						foto112.setForeground(Color.BLACK);
+						contenido.fill = GridBagConstraints.HORIZONTAL;
+						contenido.weightx = 7;
+						contenido.weighty = 1;
+						contenido.gridx = 0;
+						contenido.gridy = 1;
+						VentanaJFrame.panelCentro.add(foto112, contenido);
+						etiqueta52.setText("PROCESANDO DATOS..");foto112.setIcon(imagen112);
+						AudioClip sonido1=java.applet.Applet.newAudioClip(getClass().getResource("/retiro.wav"));
+						sonido1.play();
+						
+				}
+				if(tic==2) {
+					etiqueta52.setText("transaccion exitosa.....");
+					VentanaJFrame.panelCentro.removeAll();
+					VentanaJFrame.panelCentro.repaint();
+					etiqueta52.setText(".....transaccion exitosa......");
+					transaccionExitosa();
+				}
+						
+				tic++;	
+						
+						
+			}
+		};
+		
+		timer12=new Timer();
+		timer12.schedule(time2, 0,3500);
+		
+		
+	
+		
+		
+	}
 	private static void retiro() {
+		a=1;
 		VentanaJFrame.panelCentro.removeAll();
 		VentanaJFrame.panelCentro.repaint();
 		VentanaJFrame.panelBusqueda.removeAll();
@@ -873,7 +1035,6 @@ public class PanelAbajo extends JPanel {
 	
 		private static void clave(int valor) {
 			if(Usuario.lista.get(cedula).getsueldo()>=valor) {
-				a=1;
 				validarclave();
 			}
 			else {
@@ -882,7 +1043,20 @@ public class PanelAbajo extends JPanel {
 			
 		}
 
+	
+		private static void Sletras(JTextField clave1) {
+			clave1.addKeyListener(new KeyAdapter() {
+				public void keyTyped(KeyEvent e) {
+					char c=e.getKeyChar();
+					if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z')) && (c != 32)) {
+			            e.consume();
+			             }
+				}
+			});}
+		
 		private static void validarclave() {
+			validar=1;
+		
 			try {
 			registrar2.setEnabled(false);
 			etiqueta52.setText("..");
@@ -913,7 +1087,7 @@ public class PanelAbajo extends JPanel {
 			VentanaJFrame.panelCentro.add(q,contenido);
 			
 			JLabel clave2 = new JLabel();
-			clave2.setText("DIGITE SU CLAVE");
+			clave2.setText("DIGITE SU CLAVE");		
 			clave2.setFont(new java.awt.Font("Tahoma", 1, 16));
 			contenido.weighty = 0.3;
 			contenido.weightx = 0.5;
@@ -921,14 +1095,28 @@ public class PanelAbajo extends JPanel {
 			contenido.gridy = 2;	
 			VentanaJFrame.panelCentro.add(clave2,contenido);
 
-			clave1 = new JTextField();				
+			clave1 = new JPasswordField();
+			Sletras(clave1);
 			contenido.weighty = 0.3;
 			contenido.weightx = 0.5;
 			contenido.gridx = 2;
 			contenido.gridy = 3;
 			VentanaJFrame.panelCentro.add(clave1,contenido);
+			clave1.addKeyListener(new KeyAdapter() {
+				
+				public void keyTyped(KeyEvent e) {
+					char c=e.getKeyChar();
+					if (Character.isLetter(c)|| Character.isDigit(c)) {				
+			            e.consume();
+			             }
+				}
+			});
 			clavevalidar="";
 			clave1.setText("");
+			
+	
+			
+
 			
 			continuar=new JButton();
 			continuar.setText("CONTINUAR");
@@ -940,31 +1128,50 @@ public class PanelAbajo extends JPanel {
 			contenido.gridy = 4;
 			VentanaJFrame.panelCentro.add(continuar,contenido);
 
+			claveerronea=0;
 			
-		
+			
+			limpiar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				clavevalidar="";
+				clave1.setText(null);
+				}
+			});
 			
 			
 			continuar.addActionListener (new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					if(a==1) {
-					if(Usuario.lista.get(cedula).getclave()==Integer.parseInt(clavevalidar)){
-					System.out.println("SUELDO"+Usuario.lista.get(cedula).getsueldo());
-					System.out.println("CC");
-					float sueldot=Usuario.lista.get(cedula).getsueldo()-valor;
-					Usuario.lista.get(cedula).setsueldo(sueldot);
-					System.out.println("NUEVO SUELDO"+Usuario.lista.get(cedula).getsueldo());
-					etiqueta52.setText("TRANSFERENCIA EXITOSA");
 					
-					System.out.println("LA CLAVE ES"+clave1.getText());
-					clavevalidar="";
-					clave1.setText("");
+					if(Usuario.lista.get(cedula).getclave()==Integer.parseInt(clavevalidar)){
+						float sueldot=Usuario.lista.get(cedula).getsueldo()-valor;
+						Usuario.lista.get(cedula).setsueldo(sueldot);
+						bandera1=2;
+						VentanaJFrame.panelCentro.removeAll();
+						VentanaJFrame.panelCentro.repaint();
+						etiqueta52.setText("Procesando operacion");
+						JLabel q = new JLabel();
+						q.setText("				            ");
+						q.setFont(new java.awt.Font("Tahoma", 1, 16));
+						contenido.weighty = 0.3;
+						contenido.weightx = 22;
+						contenido.gridx = 0;
+						contenido.gridy = 0;	
+						VentanaJFrame.panelCentro.add(q,contenido);			
+						
+						System.out.println("Retiro 1");
+						retirodinero();
+						System.out.println("Retiro 3");
+						
+						
+					
 					
 				
 					}
 					else {
 						
 						claveerronea++;
-						if(claveerronea<=3) {
+						if(claveerronea<=2) {
 						clavevalidar="";
 						clave1.setText("");
 						etiqueta52.setText("CLAVE ERRONEA");
@@ -977,29 +1184,95 @@ public class PanelAbajo extends JPanel {
 					}
 				}
 				
-				if(a==2) {
-					VentanaJFrame.panelCentro.removeAll();
-					VentanaJFrame.panelCentro.repaint();
-					etiqueta52.setText(".");
-					JLabel saldo = new JLabel();
-					saldo.setText("SU SALDO ES:  "+"     $"+Usuario.lista.get(cedula).getsueldo());
-					saldo.setFont(new java.awt.Font("Tahoma", 1, 16));
-					contenido.weighty = 1;
-					contenido.weightx = 0;
-					contenido.gridx = 3;
-					contenido.gridy = 0;	
-					VentanaJFrame.panelCentro.add(saldo,contenido);
 					
-					saldo1 = new JLabel("     ");				
-					contenido.weighty = 0.3;
-					contenido.weightx = 15;
-					contenido.gridx = 2;
-					contenido.gridy = 6;
-					VentanaJFrame.panelCentro.add(saldo1,contenido);
-			
+				if(a==5 || a==6) {	
+						if(Usuario.lista.get(cedula).getclave()==Integer.parseInt(clavevalidar)){
+								etiqueta52.setText("TRANSFERENCIA EXITOSA");
+								System.out.println("SUELDO"+Usuario.lista.get(cedula).getsueldo());
+								System.out.println("CC");
+								float sueldot=Usuario.lista.get(cedula).getsueldo()-valor;
+								Usuario.lista.get(cedula).setsueldo(sueldot);
+								System.out.println("NUEVO SUELDO"+Usuario.lista.get(cedula).getsueldo());
+								System.out.println("LA CLAVE ES"+clave1.getText());
+								clavevalidar="";
+								clave1.setText("");
+								transaccionExitosa();
+								
+					
+						}
+						else {
+							
+							claveerronea++;
+							if(claveerronea<=2) {
+							clavevalidar="";
+							clave1.setText("");
+							etiqueta52.setText("CLAVE ERRONEA");
+							//ingresar();//AQUI QUIERO QUE SALGA?
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Ya ha superado el numero de intentos", "error", JOptionPane.ERROR_MESSAGE); 
+								salir();//AQUI QUIERO QUE SALGA?
+							}
+						}
+					}
+				if(a==2) {
+				
+					if(Usuario.lista.get(cedula).getclave()==Integer.parseInt(clavevalidar)){
+							VentanaJFrame.panelCentro.removeAll();
+							VentanaJFrame.panelCentro.repaint();
+							etiqueta52.setText("Consultando Informacion");
+							JLabel saldo = new JLabel();
+							saldo.setText("SU SALDO ES:  "+"     $"+Usuario.lista.get(cedula).getsueldo());
+							saldo.setFont(new java.awt.Font("Tahoma", 1, 16));
+							contenido.weighty = 1;
+							contenido.weightx = 0;
+							contenido.gridx = 3;
+							contenido.gridy = 0;	
+							VentanaJFrame.panelCentro.add(saldo,contenido);
+							
+							saldo1 = new JLabel("     ");				
+							contenido.weighty = 0.3;
+							contenido.weightx = 15;
+							contenido.gridx = 2;
+							contenido.gridy = 6;
+							VentanaJFrame.panelCentro.add(saldo1,contenido);
+							
+							JButton  continuar = new JButton();
+					          continuar.setText("CONTINUAR");
+					          continuar.setForeground(Color.WHITE);
+					          continuar.setBackground(Color.red);
+					          contenido.weighty = 0.3;
+					          contenido.weightx = 0.5;
+					          contenido.gridx = 4;
+					          contenido.gridy = 6;
+					          VentanaJFrame.panelCentro.add(continuar,contenido);
+					          
+					          continuar.addActionListener (new ActionListener(){  
+					            public void actionPerformed(ActionEvent e){
+					              transaccionExitosa();
+					              
+					          }});
+							
+							
+							}
+					else {
+						
+						claveerronea++;
+						if(claveerronea<=2) {
+						clavevalidar="";
+						clave1.setText("");
+						etiqueta52.setText("CLAVE ERRONEA");
+						//ingresar();//AQUI QUIERO QUE SALGA?
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Ya ha superado el numero de intentos", "error", JOptionPane.ERROR_MESSAGE); 
+							salir();//AQUI QUIERO QUE SALGA?
+						}
+					}
 					
 				}
 				if(a==3) {
+					if(Usuario.lista.get(cedula).getclave()==Integer.parseInt(clavevalidar)){
 					clavevalidar="";
 					clave1.setText("");
 					registrar2.setEnabled(false);
@@ -1039,12 +1312,23 @@ public class PanelAbajo extends JPanel {
 					contenido.gridy = 2;	
 					VentanaJFrame.panelCentro.add(clave3,contenido);
 
-					clave1 = new JTextField();				
+					clave1 = new JPasswordField();				
 					contenido.weighty = 0.3;
 					contenido.weightx = 0.5;
 					contenido.gridx = 2;
 					contenido.gridy = 3;
 					VentanaJFrame.panelCentro.add(clave1,contenido);
+					clave1.addKeyListener(new KeyAdapter() {					
+						public void keyTyped(KeyEvent e) {
+							char c=e.getKeyChar();
+							if (Character.isLetter(c)|| Character.isDigit(c)) {				
+					            e.consume();
+					             }
+						}
+					});
+					clavevalidar="";
+					clave1.setText("");
+					
 	
 					
 					continuar12=new JButton();
@@ -1063,16 +1347,47 @@ public class PanelAbajo extends JPanel {
 						etiqueta52.setText("CAMBIO DE CLAVE EXITOSO");
 						int nueva=Integer.parseInt(clave1.getText());
 						Usuario.lista.get(cedula).setclave(nueva);
+						try {
+						      Thread.sleep(1000);
+						} catch (InterruptedException sd) {}
 						ingresar(1);
 							
 					}});
-						
+					}else {
+						claveerronea++;
+						if(claveerronea<=2) {
+						clavevalidar="";
+						clave1.setText("");
+						etiqueta52.setText("CLAVE ERRONEA");
+						//ingresar();//AQUI QUIERO QUE SALGA?
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Ya ha superado el numero de intentos", "error", JOptionPane.ERROR_MESSAGE); 
+							salir();//AQUI QUIERO QUE SALGA?
+						}
+					}
+					
+					
+					
+					limpiar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							clavevalidar="";
+							clave1.setText(null);
+						}
+
+					});
 				}		
-				
+				boton01.addActionListener (new ActionListener(){
+					
+					public void actionPerformed(ActionEvent e){
+						ingresar(1);
+					}});
+						
 				
 				
 				}
 			});
+			
 			}
 			catch(java.lang.NullPointerException a) {
 				
@@ -1116,7 +1431,7 @@ public class PanelAbajo extends JPanel {
 			VentanaJFrame.panelCentro.add(etiquetaemp, contenido);
 			
 			JComboBox selectoremp = new JComboBox();
-			selectoremp.setModel(new DefaultComboBoxModel(new String[] {"Agua","Luz","Gas","Telefono","Internet"}));
+			selectoremp.setModel(new DefaultComboBoxModel(new String[] {"Seleccione empresa","Agua","Luz","Gas","Telefono","Internet"}));
 			selectoremp.setSelectedIndex(0);
 			contenido.fill = GridBagConstraints.HORIZONTAL;
 			contenido.weightx = 0.00003;
@@ -1141,6 +1456,16 @@ public class PanelAbajo extends JPanel {
 			contenido.gridy = 2;
 			VentanaJFrame.panelCentro.add(numeropag, contenido);
 			
+			numeropag.addKeyListener(new KeyAdapter() {					
+				public void keyTyped(KeyEvent e) {
+					char c=e.getKeyChar();
+					if (Character.isLetter(c)) {
+						JOptionPane.showMessageDialog(null, "Solo se admiten datos numericos", "error", JOptionPane.ERROR_MESSAGE); 
+			            e.consume();
+			             }
+				}
+			});
+			
 			JLabel etiqueta3 = new JLabel("VALOR A TRANSFERIR ");
 			etiqueta3.setForeground(Color.BLACK);
 			contenido.fill = GridBagConstraints.HORIZONTAL;	
@@ -1156,6 +1481,16 @@ public class PanelAbajo extends JPanel {
 			contenido.gridy = 3;
 			VentanaJFrame.panelCentro.add(valorpag, contenido);
 			
+			valorpag.addKeyListener(new KeyAdapter() {					
+				public void keyTyped(KeyEvent e) {
+					char c=e.getKeyChar();
+					if (Character.isLetter(c)) {
+						JOptionPane.showMessageDialog(null, "Solo se admiten datos numericos", "error", JOptionPane.ERROR_MESSAGE); 
+			            e.consume();
+			             }
+				}
+			});
+			
 			JButton continuar2= new JButton();
 			continuar2.setBackground(Color.ORANGE);
 			continuar2.setText("CONTINUAR CON PAGO");
@@ -1168,14 +1503,36 @@ public class PanelAbajo extends JPanel {
 			continuar2.addActionListener (new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					try {
-					valor=Integer.parseInt(valorpag.getText());
-					System.out.println("entro");
-					clave(valor);
+						if(selectoremp.getSelectedIndex()==0) {
+							JOptionPane.showMessageDialog(null, "Seleccione una empresa", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						else if(numeropag.getText().isEmpty()||valorpag.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Por favor llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						else {
+							valor=Integer.parseInt(valorpag.getText());
+							System.out.println("entro");
+							clave(valor);
+							}
+
 					}catch(java.lang.NumberFormatException ds) {
+
 						
+
 					}
+
 				}
+
 		});
+
+			limpiar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					numeropag.setText(null);
+					valorpag.setText(null);
+					selectoremp.setSelectedItem(0);
+				}
+
+			});
 		}
 		
 		private static void transferir() {
@@ -1186,7 +1543,7 @@ public class PanelAbajo extends JPanel {
 			VentanaJFrame.panelBusqueda.repaint();
 			VentanaJFrame.panelFormulario.removeAll();
 			VentanaJFrame.panelFormulario.repaint();
-			etiqueta52.setText(" ,......");
+			etiqueta52.setText("transferir");
 			
 			JLabel etiqueta42 = new JLabel("     ");
 			etiqueta42.setForeground(Color.BLACK);
@@ -1217,6 +1574,16 @@ public class PanelAbajo extends JPanel {
 			contenido.gridy = 1;
 			VentanaJFrame.panelCentro.add(nombretra, contenido);
 			
+			nombretra.addKeyListener(new KeyAdapter() {					
+				public void keyTyped(KeyEvent e) {
+					char c=e.getKeyChar();
+					if (Character.isDigit(c)) {
+						JOptionPane.showMessageDialog(null, "Solo se admiten datos alfabeticos", "error", JOptionPane.ERROR_MESSAGE); 
+			            e.consume();
+			             }
+				}
+			});
+			
 			JLabel etiqueta1 = new JLabel("N DE CUENTA ");
 			etiqueta1.setForeground(Color.BLACK);
 			contenido.fill = GridBagConstraints.HORIZONTAL;
@@ -1233,6 +1600,16 @@ public class PanelAbajo extends JPanel {
 			contenido.gridx = 2;
 			contenido.gridy = 2;
 			VentanaJFrame.panelCentro.add(ncuenta, contenido);
+			
+			ncuenta.addKeyListener(new KeyAdapter() {					
+				public void keyTyped(KeyEvent e) {
+					char c=e.getKeyChar();
+					if (Character.isLetter(c)) {
+						JOptionPane.showMessageDialog(null, "Solo se admiten datos numericos", "error", JOptionPane.ERROR_MESSAGE); 
+			            e.consume();
+			             }
+				}
+			});
 
 			JLabel etiqueta3 = new JLabel("VALOR A TRANSFERIR ");
 			etiqueta3.setForeground(Color.BLACK);
@@ -1242,7 +1619,7 @@ public class PanelAbajo extends JPanel {
 			VentanaJFrame.panelCentro.add(etiqueta3, contenido);
 			
 			JComboBox valort = new JComboBox();
-			valort.setModel(new DefaultComboBoxModel(new String[] {"10000","20000","50000","100000","200000","500000"}));
+			valort.setModel(new DefaultComboBoxModel(new String[] {"Seleccione un valor","10000","20000","50000","100000","200000","500000"}));
 			valort.setSelectedIndex(0);
 			contenido.fill = GridBagConstraints.HORIZONTAL;
 			contenido.weightx = 0.0003;
@@ -1261,25 +1638,152 @@ public class PanelAbajo extends JPanel {
 			VentanaJFrame.panelCentro.add( continuar14,contenido);
 			System.out.println("entro");
 			
+			limpiar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					nombretra.setText(null);
+					ncuenta.setText(null);
+					valort.setSelectedItem(0);
+				}
+
+			});
+			
 			continuar14.addActionListener (new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					try {
+
 					System.out.println("entro1sdsdsd2");
+
+					if(valort.getSelectedIndex()==0) {
+						JOptionPane.showMessageDialog(null, "Seleccione un valor", "Error",	JOptionPane.ERROR_MESSAGE);
+
+					}
+
+					else if(ncuenta.getText().isEmpty()||nombretra.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Por favor llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+
+					}
+
+					else {
+
 					String valoraux=(String) valort.getSelectedItem();
 					System.out.println(valoraux);
 					valor=Integer.parseInt(valoraux);
 					System.out.println(valor);
 					System.out.println("entro");
 					clave(valor);
-					}catch(java.lang.NumberFormatException ds) {
-						
+					
+
 					}
+
+					}catch(java.lang.NumberFormatException ds) {
+
+						
+
+					}
+
 				}
+
 		});
 			
 		
 		}
+		public static void transaccionExitosa() {
+	
+			 etiqueta52.setText("..transaccion exitosa!.........");
+			 cancelar.setEnabled(false);
+			 salir.setEnabled(false);
+			  VentanaJFrame.panelCentro.removeAll(); 
+			  VentanaJFrame.panelCentro.repaint(); 
+			  VentanaJFrame.panelBusqueda.removeAll(); 
+			  VentanaJFrame.panelBusqueda.repaint(); 
+			  VentanaJFrame.panelFormulario.removeAll(); 
+			  VentanaJFrame.panelFormulario.repaint(); 
+			  etiqueta52.setText("TRANSACCION EXITOSA......");
+			 
+			  etiqueta52.setText("TRANSACCION EXITOSA!..");
+			
 
+			   
+			  JLabel q1 = new JLabel(); 
+			  q1.setText("                  "); 
+			  q1.setFont(new java.awt.Font("Tahoma", 1, 16)); 
+			  contenido.weighty = 0.3; 
+			  contenido.weightx = 34; 
+			  contenido.gridx = 3; 
+			  contenido.gridy = 1;   
+			  VentanaJFrame.panelCentro.add(q1,contenido); 
+			   
+			  JLabel q = new JLabel(); 
+			  q.setText("                    "); 
+			  q.setFont(new java.awt.Font("Tahoma", 1, 16)); 
+			  contenido.weighty = 0.3; 
+			  contenido.weightx = 22; 
+			  contenido.gridx = 0; 
+			  contenido.gridy = 1;   
+			  VentanaJFrame.panelCentro.add(q,contenido); 
+			   
+			  JLabel clave3 = new JLabel(); 
+			  clave3.setText("SU TRANSACCION HA SIDO TERMINADA");
+			  clave3.setFont(new java.awt.Font("Tahoma", 1, 16)); 
+			  contenido.weighty = 0.3; 
+			  contenido.weightx = 1; 
+			  contenido.gridx = 2; 
+			  contenido.gridy = 2;   
+			  VentanaJFrame.panelCentro.add(clave3,contenido); 
+			 
+			  continuar12=new JButton(); 
+			  continuar12.setText("MENU PRINCIPAL"); 
+			  continuar12.setForeground(Color.WHITE); 
+			  continuar12.setBackground(Color.red); 
+			  contenido.weighty = 0.3; 
+			  contenido.weightx = 0.5; 
+			  contenido.gridx = 1; 
+			  contenido.gridy = 4; 
+			  VentanaJFrame.panelCentro.add(continuar12,contenido); 
+			   
+			  JLabel q3 = new JLabel(); 
+			  q3.setText("-------------------------------------------------"); 
+			  q3.setForeground(Color.orange);
+			  q3.setFont(new java.awt.Font("Tahoma", 1, 16)); 
+			  contenido.weighty = 1; 
+			  contenido.weightx = 2; 
+			  contenido.gridx = 2; 
+			  contenido.gridy = 4;   
+			  VentanaJFrame.panelCentro.add(q3,contenido); 
+			   
+			  JButton salir1 = new JButton(); 
+			  salir1.setText("SALIR"); 
+			  salir1.setForeground(Color.WHITE); 
+			  salir1.setBackground(Color.red); 
+			  contenido.weighty = 0; 
+			  contenido.weightx = 0; 
+			  contenido.gridx = 4; 
+			  contenido.gridy = 4; 
+			  VentanaJFrame.panelCentro.add(salir1,contenido); 
+			  
+			  URL url =PanelAbajo.class.getResource("transferencia.wav");
+			   AudioClip clip = Applet.newAudioClip(url);
+			    clip.play(); 
+			   
+			  continuar12.addActionListener (new ActionListener(){   
+			    public void actionPerformed(ActionEvent e){ 
+			    ingresar(1); 
+			       
+			  }}); 
+			  salir1.addActionListener (new ActionListener(){   
+			    public void actionPerformed(ActionEvent e){ 
+			    salir(); 
+			       
+			  }}); 
+			  
+	
+			} 
+			   
+
+		
+		
+		
+	
 	
 }
 				

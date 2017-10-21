@@ -42,10 +42,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class PanelDerecho extends JPanel {
-	
+	//Panel de botones
 	  static JButton retiroef,consultarsa,transferencias,registrar11,registrar22,registrar12;
 	  public PanelDerecho() {
-		  
+		  	//Creo un borde  ademas de un gridbaglayout
 		  	Border borde = BorderFactory.createTitledBorder( "" );
 		    setBorder( borde );
 			setLayout(new GridBagLayout());
@@ -54,15 +54,15 @@ public class PanelDerecho extends JPanel {
 			JLabel etiqueta = new JLabel("    ");
 			etiqueta.setForeground(Color.BLACK);
 			contenido.fill = GridBagConstraints.CENTER;
+			//el contenido.weightx y contenido.weighty me indica cuantos espacios va a ocupar dentro del JFrame
 			contenido.weightx = 0.3;
 			contenido.weighty = 0.003;
 			contenido.gridx = 0;
 			contenido.gridy = 0;
 			add(etiqueta, contenido);
-		  
+			// este boton es un diseño dentro de la ventana principal
 			registrar11 = new JButton();
 			registrar11.setBackground(Color.ORANGE);
-			registrar11.setToolTipText("JOvalButton in BorderLayout.Center without Preferrered Diameter");
 			registrar11.setText(">>");
 			contenido.fill = GridBagConstraints.HORIZONTAL;
 			contenido.weighty = 0.3;
@@ -70,7 +70,7 @@ public class PanelDerecho extends JPanel {
 			contenido.gridx = 1;
 			contenido.gridy = 1;
 			add(registrar11, contenido);
-			
+			// este boton es un diseño dentro de la ventana principal
 			registrar22 = new JButton();
 			registrar22.setBackground(Color.ORANGE);
 			registrar22.setText(">>");
@@ -80,7 +80,7 @@ public class PanelDerecho extends JPanel {
 			contenido.gridx = 1;
 			contenido.gridy = 2;
 			add(registrar22, contenido);
-			
+			// este boton es un diseño dentro de la ventana principal
 			registrar12 = new JButton();
 			registrar12.setBackground(Color.ORANGE);
 			registrar12.setText(">>");

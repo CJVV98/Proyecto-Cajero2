@@ -1,12 +1,19 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Principal {
-	Map<Integer, Object> usuarios;
-	List<Persona> lista;
+// Creo una ventana detipo Jframe denominada obj1
+	
+	static VentanaJFrame obj1;
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		VentanaJFrame obj1 = new VentanaJFrame();
+		//la instancio y llamo su metodo constructor
+		Usuario.lista = new ArrayList<Persona>(); 
+		ventananuev();		
+	}
+	public static void ventananuev() {
+		obj1 = new VentanaJFrame();
+		
 	}
 
 }

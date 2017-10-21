@@ -35,10 +35,11 @@ public class VentanaJFrame extends JFrame {
 				this.getContentPane( ).setLayout( new BorderLayout( ) );//ORGANIZAR ARRIBA
 				//this.setResizable(false); 
 				this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				//retorna al Jframe todos los elementos impuestos al Jframe
 				return this;
 	}
 	
-	//Metodo que coloca cada JPanel en la ubicacion dada segun su Layout
+	//Metodo que coloca cada JPanel en la ubicacion dada segun su setLayout
 	public void componente() {
 		
 	

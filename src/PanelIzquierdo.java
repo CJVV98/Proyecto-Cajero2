@@ -7,12 +7,18 @@ import java.util.Iterator;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-
+/**
+ * Este panel tiene una botones para indicar las operaciones a realizar
+ * @author Corin Viracacha y Isaac Gomez
+ */
 
 public class PanelIzquierdo extends JPanel {
 	static JButton pagos,cambiocl,registrar11,registrar22,registrar12;
 	int dato;
 	int a=0;
+	/**
+	 * Metodo constructor del panel izquierdo
+	 */
 	public PanelIzquierdo(){
 		//Panel izquierdo de botones
 		// añado un border sin titulo ademas creo un setLayout de tipo GridBagLayout

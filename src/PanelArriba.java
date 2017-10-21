@@ -1,8 +1,14 @@
+
 import java.awt.*;
 import javax.swing.*;
-
+/**
+ * Este panel tiene el logo del cajero
+ * @author Corin Viracacha y Isaac Gomez
+ */
 public class PanelArriba extends JPanel {
-// Clase de tipo JPanel en la cual va una imagen del logo de nuestro cajero	
+	/**
+	 * Metodo constructor del panel
+	 */
 	public PanelArriba() {
 		
 		    setLayout( new BorderLayout( ) );

@@ -1,3 +1,5 @@
+
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.BorderLayout;
@@ -21,39 +23,61 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-
+/**
+ * Esta clase se encarga de realizar las operaciones y todo el movimiento del cajero
+ * @author Corin Viracacha y Isaac Gomez
+ */
 public class PanelAbajo extends JPanel {
-	//Creo variables de tipo estatico con el fin de acceder a cualquier metodo estatico 
+	/**
+	 * Creo variables de tipo estatico con el fin de acceder a cualquier metodo estatico 
+	 */
 	static boolean val;
 	static Usuario usuario;
     static JButton btnOpcion1,registrar2,limpiar,registrar16,boton1,boton2,boton3,boton4,boton5,boton6,boton7,boton8,boton9,boton02,boton01,continuar,salir,cancelar,continuar1,continuar12;
     static JLabel etiqueta52,saldo1,foto112;
 	static int bandera=0,cedula,valor,claveerronea=0,b=0,i,a=0,contador=0,validar=1,bandera1=0,validar2=0,validar3=0,er=0;
-	//a es una bandera que me indica en que operacion esta
-	// por ejemplo 0 indica que no ha ingresado a cajero
+	/**
+	 *  es una bandera que me indica en que operacion esta
+	 */
 	// 1 retiro, 2 consulta, 3 cambio de clave, 5 transacciones, 6 pagos
 	static GridBagConstraints contenido;
 	static JPasswordField clave1;
 	static JTextField cajadetexto,clave4,numeropag,valorpag,nombretra,ncuenta,valort;
 	static String clavevalidar="", clavevalidar1="",bcs,vocales;
 	static ImageIcon imagen1;
-	//ImagenIcon es para insertar una imagen
+	/**
+	 * ImagenIcon es para insertar una imagen
+	 */
 	static Timer timer12;
-	//esta funcion Timer me sirve para indicar el contenido que va a quedar detenido segun el instante de tiempo determinado
+	/**
+	 * esta funcion Timer me sirve para indicar el contenido que va a quedar detenido segun el instante de tiempo determinado
+	 */
 	static TimerTask time2;
-	//TimerTask sirve para determinar la velocidad con la que se efecturan el cambio de imagenes
+	/**
+	 * TimerTask sirve para determinar la velocidad con la que se efecturan el cambio de imagenes
+	 */
 	static AudioClip sonido;
-	//AudioClip es para insertar un audio
+	/**
+	 * AudioClip es para insertar un audio
+	 */
 	
+	
+	/**
+	 * Metodo constructor del panel
+	 */
 	
 	public PanelAbajo() {
-	//Una vez inicie el Jframe con la funcion java.applet.Applet.newAudioClip(getClass().getResource("/sonido2.wav")) determino el sonido que guardara la variable
-	//una vez obtenida la informacion le doy play para que suene
+	/**
+	 * java.applet.Applet.newAudioClip(getClass().getResource("/sonido2.wav")) me permite generar un sonido
+	 */
+
 	sonido=java.applet.Applet.newAudioClip(getClass().getResource("/sonido2.wav"));
 	sonido.play();
-	
+	//una vez obtenida la informacion le doy play para que suene
 		
-		
+	/**
+	 * 	GridBagLayout() es la organizacion de nuestro panel
+	 */
 	Border borde = BorderFactory.createTitledBorder( "" );
     setBorder( borde );
 	setLayout(new GridBagLayout());
@@ -106,7 +130,8 @@ public class PanelAbajo extends JPanel {
 	contenido.gridy = 1;
 	add(boton2, contenido);
 	
-	//Boton del 3
+	// Boton del 3
+	
 	boton3  = new JButton();
 	boton3.setBackground(Color.ORANGE);
 	boton2.setSize(5, 5);
@@ -291,7 +316,10 @@ public class PanelAbajo extends JPanel {
 	contenido.gridx = 5;
 	contenido.gridy = 7;
 	add(cajadetexto, contenido);
-	cajadetexto.addKeyListener(new KeyAdapter() {					
+	cajadetexto.addKeyListener(new KeyAdapter() {	
+		/**
+		 * Metodo generado por el addKeyListener para validar datos numericos
+		 */
 		public void keyTyped(KeyEvent e) {
 			char c=e.getKeyChar();
 			if (Character.isLetter(c)) {	
@@ -366,17 +394,26 @@ public class PanelAbajo extends JPanel {
 	
 	// si escucha este boton accede al cajero 
 	registrar2.addActionListener (new ActionListener(){
+		/**
+		 * Metodo para ingresar al metodo ingresar
+		 */
 		public void actionPerformed(ActionEvent e){	
 			ingresar(2);
 	}});
 	// cuando escucha este boton ingresa a un JFrame nuevo de tipo usuario donde compleatara unos datos de registro
 	registrar16.addActionListener (new ActionListener(){
+		/**
+		 * Metodo para crear nuevo usuario apartir del listener del boton nuevo usuario
+		 */
 		public void actionPerformed(ActionEvent e){
 			usuario = new Usuario("USUARIO");
 			
 	}});
 	// si escucha este boton una vez halla ingresado al cajero el me devuelve al inicio
 	cancelar.addActionListener (new ActionListener(){
+		/**
+		 * Metodo para volver al menu principal a partir del listener del boton cancelar
+		 */
 		public void actionPerformed(ActionEvent e){	
 			if(a==1|| a==2 || a==3 || a==5 || a==6) {
 				ingresar(1);}
@@ -384,12 +421,16 @@ public class PanelAbajo extends JPanel {
 	
 	//salir es para salir totalmente del sistema
 	salir.addActionListener(new ActionListener() {
+		/**
+		 * Metodo para salir del cajero
+		 */
 		public void actionPerformed(ActionEvent e) {
 			a=0;
 			salir();
 	}});
-// Botones de teclado cuando escucha algun boton del teclado
-// me lo va guardando en una variable string y me lo va poniendo en una caja de texto llamada clave1
+	/**
+	 * Metodos para los botones numericos 
+	 */
 	boton1.addActionListener (new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 		try {
@@ -490,9 +531,10 @@ public class PanelAbajo extends JPanel {
 	
 }
 
-//Este metodo es invocado cuando escucha el boton salir
-//aqui me pone en invisible la primera pantalla y me crea otra en donde caja de texto corresponde al numero de la tarjeta la dejamos null
-// para que se borre el ultimo numero de tarjeta ingresado
+/**
+ * Este metodo es invocado cuando escucha el boton salir
+ */
+
 public static void salir() {
 		validar2=0;
 		validar3=0;
@@ -500,14 +542,13 @@ public static void salir() {
 		cajadetexto.setText("");
 		Principal.ventananuev();		
 		a=0;
-		
+		}
 
-		
-		
-		
-	}
-	//Este metodo me recorre la lista y me la valida segun el usuario
-	public static boolean validarUsuario() {
+/**
+	 * Este metodo me recorre la lista y me la valida si el usuario se encuentra registrado
+	 *  @return val: que indica si la busqueda de usuario se encontro o no
+*/
+public static boolean validarUsuario() {
 	validar2=0;
 	validar3=0;
 	
@@ -544,15 +585,19 @@ public static void salir() {
 			System.out.println("FALSO");
 		}}
 		return val;
+	
 	}
 	
-	//aqui recibe un valor que es segun el ingresar del usuario ademas valida datos
-	public static void ingresar(int rec) {
+/**
+ * Este metodo me muestra las operaciones del cajero
+ * @param bandera me indica si encontro algun usuario o no
+ * @throws esto para indicar si la lisyta esta vacia
+ */
+public static void ingresar(int rec) {
 		cancelar.setEnabled(true);
 		 salir.setEnabled(true);
 		try {
-			// aqui llama la funcion validar cedula
-	
+			
 			if(validarUsuario()==false) {
 				if(bandera==3) {
 					etiqueta52.setText("Procesando información.");
@@ -567,6 +612,7 @@ public static void salir() {
 			}else {
 	
 			if(validarUsuario()==true) {
+				cajadetexto.setEnabled(false);
 				rec = 1;
 				System.out.println("2."+bandera);
 				System.out.println("3."+rec);
@@ -764,8 +810,13 @@ public static void salir() {
 		}
 	}
 	
-	// Realizo el retiro de dinero
-	private static void retirodinero() {
+	/**
+	 *  Metodo para mostrar el proceso del retiro del dinero
+	 *  @param etiqueta52 es para indicar el mensaje del proceso
+	 *  @param timer es para recorrer imagenes en un determinado tiempo
+	 *  @param tic es para indicar los tiempos y por cada tiempo realizar acciones
+	 */
+private static void retirodinero() {
 		System.out.println("Retiro 2");
 		VentanaJFrame.panelBusqueda.removeAll();
 		VentanaJFrame.panelBusqueda.repaint();
@@ -860,8 +911,12 @@ public static void salir() {
 		
 	}
 	
-	//Aqui realizo el usuario escoge la suma a retirar
-	private static void retiro() {
+	/**
+	 * Metodo para que el usuario escojo el monto a retirar
+	 *  @param "a" es una bandera para indicar que es un retiro
+	 * 
+	 */
+private static void retiro() {
 		a=1;
 		VentanaJFrame.panelCentro.removeAll();
 		VentanaJFrame.panelCentro.repaint();
@@ -1044,8 +1099,13 @@ public static void salir() {
 	});
 	}
 	
-	//Aqui valida si el saldo del usuario es mayor al solicitado
-		private static void clave(int valor) {
+
+/**
+ * Metodo para validar que el saldo sea mayor a lo solicitado
+ * 
+ */
+		
+private static void clave(int valor) {
 			if(Usuario.lista.get(cedula).getsueldo()>=valor) {
 				validarclave();
 			}
@@ -1065,8 +1125,15 @@ public static void salir() {
 			             }
 				}
 			});}
-	//Aqui repinto el panel de centro y creo un formulario para la clave
-		private static void validarclave() {
+
+
+	/**
+	 * Metodo para validar clave de usuario
+	 * @param segun la bandera "a" realizo las respectivas operaciones 
+	 * @throws java.lang.NumberFormatException es para analizar si la clave esta vacia
+	 * @param limpiar que es un boton reviso que no me ingresen claves vacias
+	*/
+private static void validarclave() {
 			validar=1;
 		
 			try {
@@ -1229,9 +1296,11 @@ public static void salir() {
 							}
 						}
 					}
+				//Este es validacion de clave para consultar a==2 es consultar saldo
 				if(a==2) {
 				try {
 					if(Usuario.lista.get(cedula).getclave()==Integer.parseInt(clavevalidar)){
+							//repinto el panel del centro
 							VentanaJFrame.panelCentro.removeAll();
 							VentanaJFrame.panelCentro.repaint();
 							etiqueta52.setText("CONSULTANDO INFORMACION");
@@ -1250,7 +1319,7 @@ public static void salir() {
 							contenido.gridx = 2;
 							contenido.gridy = 6;
 							VentanaJFrame.panelCentro.add(saldo1,contenido);
-							
+							// este boton me permite volver al menu o salirme
 							JButton  continuar = new JButton();
 					          continuar.setText("CONTINUAR");
 					          continuar.setForeground(Color.WHITE);
@@ -1269,6 +1338,7 @@ public static void salir() {
 							
 							
 							}
+					// si la clave es incorrecta me va sumando al acumulador hasta 3 intentos
 					else {
 						
 						claveerronea++;
@@ -1280,13 +1350,14 @@ public static void salir() {
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "Ya ha superado el numero de intentos", "error", JOptionPane.ERROR_MESSAGE); 
-							salir();//AQUI QUIERO QUE SALGA?
+							salir();//Sale por que se acabaron los 3 intentos
 						}
 					}
 				}catch(java.lang.NumberFormatException sd) {
 					JOptionPane.showMessageDialog(null, "La clave esta vacia", "error", JOptionPane.ERROR_MESSAGE); 
 				}
 				}
+				//Este a==3 es para el cambio de clave
 				if(a==3) {
 					try {
 					er=0;
@@ -1295,13 +1366,15 @@ public static void salir() {
 					clave1.setText("");
 					registrar2.setEnabled(false);
 					etiqueta52.setText("  -");
-					
+					// repinto los paneles
 					VentanaJFrame.panelCentro.removeAll();
 					VentanaJFrame.panelCentro.repaint();
 					VentanaJFrame.panelBusqueda.removeAll();
 					VentanaJFrame.panelBusqueda.repaint();
 					VentanaJFrame.panelFormulario.removeAll();
 					VentanaJFrame.panelFormulario.repaint();
+					
+					//obtengo la antigua clave ingresada por el textarea
 					int antigua=Usuario.lista.get(cedula).getclave();
 					JLabel q1 = new JLabel();
 					q1.setText("									");
@@ -1329,13 +1402,14 @@ public static void salir() {
 					contenido.gridx = 2;
 					contenido.gridy = 2;	
 					VentanaJFrame.panelCentro.add(clave3,contenido);
-
+					//en este text area guardo la informacion de la nueva clave
 					clave1 = new JPasswordField();				
 					contenido.weighty = 0.3;
 					contenido.weightx = 0.5;
 					contenido.gridx = 2;
 					contenido.gridy = 3;
 					VentanaJFrame.panelCentro.add(clave1,contenido);
+					//validar letras 
 					clave1.addKeyListener(new KeyAdapter() {					
 						public void keyTyped(KeyEvent e) {
 							char c=e.getKeyChar();
@@ -1346,9 +1420,7 @@ public static void salir() {
 					});
 					clavevalidar="";
 					clave1.setText("");
-					
-			
-				
+
 					
 					continuar12=new JButton();
 					continuar12.setText("CONTINUAR");
@@ -1361,24 +1433,31 @@ public static void salir() {
 					VentanaJFrame.panelCentro.add(continuar12,contenido);
 					continuar12.addActionListener (new ActionListener(){	
 						public void actionPerformed(ActionEvent e){
+						
 						er=0;
+						//este try es por si la clave esta vacia 
 						try {
 						int nuevaaux=Integer.parseInt(clave1.getText());
 						}catch(java.lang.NumberFormatException sd) {
+							//creo una bandera
 							er=1;
 							
 						}
+						//si la bandera se cumple me manda un mensaje de advertencia
 						if(er==1) {
 							JOptionPane.showMessageDialog(null, "La nueva clave esta vacia", "error", JOptionPane.ERROR_MESSAGE);
 						}
+						//si no se cumple la condicion
 						else {
-						
+						//creo una variable entera llamada nueva aqui almacena la nueva clave
 						int nueva=Integer.parseInt(clave1.getText());
+						//aqui llamo la lista segun la cedula es la posicion de la lista en la que se encuentra y hay le mando el nuevo valor
 						Usuario.lista.get(cedula).setclave(nueva);
 						cambioexitoso();
 						}	
 					}});
 					}else {
+						// si la clave es erronea el me permite realizar tres intentos y al tercero intento sale del cajero
 						claveerronea++;
 						if(claveerronea<=2) {
 						clavevalidar="";
@@ -1393,7 +1472,7 @@ public static void salir() {
 					}
 					
 					
-					
+					// limpia las cajas de texto
 					limpiar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							clavevalidar="";
@@ -1405,14 +1484,7 @@ public static void salir() {
 						JOptionPane.showMessageDialog(null, "La clave esta vacia", "error", JOptionPane.ERROR_MESSAGE); 
 					}
 					}		
-				boton01.addActionListener (new ActionListener(){
-					
-					public void actionPerformed(ActionEvent e){
-						ingresar(1);
-					}});
-						
-				
-				
+			
 				}
 			});
 			
@@ -1428,7 +1500,11 @@ public static void salir() {
 		}
 		
 		
-		private static void realizarpagos() {
+	/**
+	 * Metodo para realizar los pagos
+	 * @param limpiar boton para limpiar datos de las cajas de texto
+	 */
+private static void realizarpagos() {
 			a=6;
 			VentanaJFrame.panelCentro.removeAll();
 			VentanaJFrame.panelCentro.repaint();
@@ -1457,7 +1533,7 @@ public static void salir() {
 			contenido.gridx = 1;
 			contenido.gridy = 1;
 			VentanaJFrame.panelCentro.add(etiquetaemp, contenido);
-			
+			// este es un selector para indicar la empresa a la cual le quiero hacer el pago
 			JComboBox selectoremp = new JComboBox();
 			selectoremp.setModel(new DefaultComboBoxModel(new String[] {"Seleccione empresa","Agua","Luz","Gas","Telefono","Internet"}));
 			selectoremp.setSelectedIndex(0);
@@ -1483,7 +1559,7 @@ public static void salir() {
 			contenido.gridx = 2;
 			contenido.gridy = 2;
 			VentanaJFrame.panelCentro.add(numeropag, contenido);
-			
+			//Aqui valido los datos numericos del jtesfield
 			numeropag.addKeyListener(new KeyAdapter() {					
 				public void keyTyped(KeyEvent e) {
 					char c=e.getKeyChar();
@@ -1500,7 +1576,7 @@ public static void salir() {
 			contenido.gridx = 1;
 			contenido.gridy = 3;
 			VentanaJFrame.panelCentro.add(etiqueta3, contenido);
-			
+			//Aqui se guarda el valor a pagar
 			valorpag = new JTextField();
 			valorpag.setText("");
 			contenido.fill = GridBagConstraints.HORIZONTAL;
@@ -1508,7 +1584,7 @@ public static void salir() {
 			contenido.gridx = 2;
 			contenido.gridy = 3;
 			VentanaJFrame.panelCentro.add(valorpag, contenido);
-			
+			//Valido que solo me ingresen datos numericos
 			valorpag.addKeyListener(new KeyAdapter() {					
 				public void keyTyped(KeyEvent e) {
 					char c=e.getKeyChar();
@@ -1527,9 +1603,10 @@ public static void salir() {
 			contenido.gridx = 4;
 			contenido.gridy = 4;
 			VentanaJFrame.panelCentro.add( continuar2,contenido);
-			
+			//cuando doy clic en el boton de continuar
 			continuar2.addActionListener (new ActionListener(){
 				public void actionPerformed(ActionEvent e){
+					//aqui valido los campos en blanco y la seleccion del selector
 					try {
 						if(selectoremp.getSelectedIndex()==0) {
 							JOptionPane.showMessageDialog(null, "Seleccione una empresa", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1552,7 +1629,7 @@ public static void salir() {
 				}
 
 		});
-
+//Aqui borro las cajas de texto existentes en ese momento en el panel del centro
 			limpiar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					numeropag.setText(null);
@@ -1563,8 +1640,13 @@ public static void salir() {
 			});
 		}
 		
-		private static void transferir() {
+/**
+ * Metodo para transferir dinero
+ * el boton continuar14 me permite continuar y validar la informacion ingresada
+ */
+private static void transferir() {
 			a=5;
+			//
 			VentanaJFrame.panelCentro.removeAll();
 			VentanaJFrame.panelCentro.repaint();
 			VentanaJFrame.panelBusqueda.removeAll();
@@ -1601,7 +1683,7 @@ public static void salir() {
 			contenido.gridx = 2;
 			contenido.gridy = 1;
 			VentanaJFrame.panelCentro.add(nombretra, contenido);
-			
+			//Aqui valido que el nombre solo sea letras
 			nombretra.addKeyListener(new KeyAdapter() {					
 				public void keyTyped(KeyEvent e) {
 					char c=e.getKeyChar();
@@ -1628,7 +1710,7 @@ public static void salir() {
 			contenido.gridx = 2;
 			contenido.gridy = 2;
 			VentanaJFrame.panelCentro.add(ncuenta, contenido);
-			
+			// En este valido que el numero de cuenta solo sean datos numericos
 			ncuenta.addKeyListener(new KeyAdapter() {					
 				public void keyTyped(KeyEvent e) {
 					char c=e.getKeyChar();
@@ -1638,14 +1720,15 @@ public static void salir() {
 			             }
 				}
 			});
-
+			
+			
 			JLabel etiqueta3 = new JLabel("VALOR A TRANSFERIR ");
 			etiqueta3.setForeground(Color.BLACK);
 			contenido.fill = GridBagConstraints.HORIZONTAL;	
 			contenido.gridx = 1;
 			contenido.gridy = 3;
 			VentanaJFrame.panelCentro.add(etiqueta3, contenido);
-			
+			// es un selector en el cual el usuario escojera el monto a transferir
 			JComboBox valort = new JComboBox();
 			valort.setModel(new DefaultComboBoxModel(new String[] {"Seleccione un valor","10000","20000","50000","100000","200000","500000"}));
 			valort.setSelectedIndex(0);
@@ -1665,7 +1748,7 @@ public static void salir() {
 			contenido.gridy = 4;
 			VentanaJFrame.panelCentro.add( continuar14,contenido);
 			System.out.println("entro");
-			
+			// este boton es para limiar las cajas del transferir plata
 			limpiar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					nombretra.setText(null);
@@ -1674,27 +1757,24 @@ public static void salir() {
 				}
 
 			});
-			
+			// Aqui es cuando escucha el boton de continuar con la operacion
 			continuar14.addActionListener (new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					try {
-
-					System.out.println("entro1sdsdsd2");
-
+					//Aqui valido que alla seleccionado algun valor 
 					if(valort.getSelectedIndex()==0) {
 						JOptionPane.showMessageDialog(null, "Seleccione un valor", "Error",	JOptionPane.ERROR_MESSAGE);
 
 					}
-
+					//aqui valido que las cajas de texto no este vacias
 					else if(ncuenta.getText().isEmpty()||nombretra.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(null, "Por favor llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
 
 					}
 
 					else {
-
+					//Aqui convierto la seleccion del usuario en string y luego en entero para mandarla a validar si esta dentro del rango del saldo del usuario
 					String valoraux=(String) valort.getSelectedItem();
-					System.out.println(valoraux);
 					valor=Integer.parseInt(valoraux);
 					System.out.println(valor);
 					System.out.println("entro");
@@ -1715,11 +1795,17 @@ public static void salir() {
 			
 		
 		}
+		
+/**
+ * Metodo para indicar que la transaccion ha sido exitosa
+ */
 		public static void transaccionExitosa() {
-	
+			//imprimo que la transaccion ha sido exitosa 
 			 etiqueta52.setText("..transaccion exitosa!.........");
+			//desactivo los botones cancelar y salir del teclado numerico
 			 cancelar.setEnabled(false);
 			 salir.setEnabled(false);
+			 //repinto la pantalla
 			  VentanaJFrame.panelCentro.removeAll(); 
 			  VentanaJFrame.panelCentro.repaint(); 
 			  VentanaJFrame.panelBusqueda.removeAll(); 
@@ -1758,7 +1844,7 @@ public static void salir() {
 			  contenido.gridx = 2; 
 			  contenido.gridy = 2;   
 			  VentanaJFrame.panelCentro.add(clave3,contenido); 
-			 
+			 //Este boton me lleva al menu principal
 			  continuar12=new JButton(); 
 			  continuar12.setText("MENU PRINCIPAL"); 
 			  continuar12.setForeground(Color.WHITE); 
@@ -1778,7 +1864,7 @@ public static void salir() {
 			  contenido.gridx = 2; 
 			  contenido.gridy = 4;   
 			  VentanaJFrame.panelCentro.add(q3,contenido); 
-			   
+			  // este boton es para salir del cajero
 			  JButton salir1 = new JButton(); 
 			  salir1.setText("SALIR"); 
 			  salir1.setForeground(Color.WHITE); 
@@ -1788,30 +1874,35 @@ public static void salir() {
 			  contenido.gridx = 4; 
 			  contenido.gridy = 4; 
 			  VentanaJFrame.panelCentro.add(salir1,contenido); 
-			  
+			  //Aqui pongo a correr un audio que indica que la transferencia ha sido exitosa
 			  URL url =PanelAbajo.class.getResource("transferencia.wav");
 			   AudioClip clip = Applet.newAudioClip(url);
 			    clip.play(); 
 			   
 			  continuar12.addActionListener (new ActionListener(){   
 			    public void actionPerformed(ActionEvent e){ 
+			    //este ingresar es para volver al menu
 			    ingresar(1); 
 			       
 			  }}); 
 			  salir1.addActionListener (new ActionListener(){   
 			    public void actionPerformed(ActionEvent e){ 
+			    // llamo a la funcion salir del cajero
 			    salir(); 
 			       
 			  }}); 
 			  
 	
 			} 
-			   
+/**
+ * Metodo para indicar un cambio de clave exitoso	   
+ */
 		public static void cambioexitoso() {
 			
-		
+			//desactivo los botones cancelar y salir del teclado numerico
 			 cancelar.setEnabled(false);
 			 salir.setEnabled(false);
+			 //repinto la pantalla
 			  VentanaJFrame.panelCentro.removeAll(); 
 			  VentanaJFrame.panelCentro.repaint(); 
 			  VentanaJFrame.panelBusqueda.removeAll(); 
@@ -1820,10 +1911,7 @@ public static void salir() {
 			  VentanaJFrame.panelFormulario.repaint(); 
 			  etiqueta52.setText("CAMBIO DE CLAVE EXITOSO");
 			 
-			  etiqueta52.setText("CAMBIO DE CLAVE EXITOSO..");
-			
-
-			   
+			  etiqueta52.setText("CAMBIO DE CLAVE EXITOSO..");   
 			  JLabel q1 = new JLabel(); 
 			  q1.setText("                  "); 
 			  q1.setFont(new java.awt.Font("Tahoma", 1, 16)); 
@@ -1850,7 +1938,7 @@ public static void salir() {
 			  contenido.gridx = 2; 
 			  contenido.gridy = 2;   
 			  VentanaJFrame.panelCentro.add(clave3,contenido); 
-			 
+			  //Este boton es para retornar al menu principal
 			  continuar12=new JButton(); 
 			  continuar12.setText("MENU PRINCIPAL"); 
 			  continuar12.setForeground(Color.WHITE); 
@@ -1870,7 +1958,7 @@ public static void salir() {
 			  contenido.gridx = 2; 
 			  contenido.gridy = 4;   
 			  VentanaJFrame.panelCentro.add(q3,contenido); 
-			   
+			  //Este boton es para salir del cajero
 			  JButton salir1 = new JButton(); 
 			  salir1.setText("SALIR"); 
 			  salir1.setForeground(Color.WHITE); 
@@ -1885,11 +1973,13 @@ public static void salir() {
 			   
 			  continuar12.addActionListener (new ActionListener(){   
 			    public void actionPerformed(ActionEvent e){ 
+			   //este ingresar es para volver al menu
 			    ingresar(1); 
 			       
 			  }}); 
 			  salir1.addActionListener (new ActionListener(){   
 			    public void actionPerformed(ActionEvent e){ 
+			     // llamo a la funcion salir del cajero
 			    salir(); 
 			       
 			  }}); 

@@ -1,3 +1,4 @@
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -40,10 +41,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
+/**
+ * Este panel tiene una botones para indicar las operaciones a realizar
+ * @author Corin Viracacha y Isaac Gomez
+ */
 public class PanelDerecho extends JPanel {
 	//Panel de botones
 	  static JButton retiroef,consultarsa,transferencias,registrar11,registrar22,registrar12;
+		/**
+		 * Metodo constructor del panel derecho
+		 */
 	  public PanelDerecho() {
 		  	//Creo un borde  ademas de un gridbaglayout
 		  	Border borde = BorderFactory.createTitledBorder( "" );

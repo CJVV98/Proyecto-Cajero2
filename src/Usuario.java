@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -17,8 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
- *
- * @author Johan
+ * Este clase me crea un JFrame para añadir usuarios
+ * @author Corin Viracacha y Isaac Gomez
  */
 //Creo la clase usuario
 class Usuario extends JFrame{
@@ -26,7 +27,9 @@ class Usuario extends JFrame{
 static List<Persona> lista;
 static int ban=0,user;
 static String nombresuser;
-	// inicializo el JFrame y sus componentes
+/**
+ * Contructor de la clase usuario
+ */
 	public Usuario(String titulo) {
 		super(titulo);
 		
@@ -36,7 +39,9 @@ static String nombresuser;
 		this.pack();
 		this.setVisible(true);
 	}
-	//Diseño del JFrame
+	/**
+	 * Diseño de JFrame Usuario
+	 */
 	private Usuario iniciar() {
 		JFrame frame=new JFrame();
 		
@@ -48,7 +53,11 @@ static String nombresuser;
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		return this;
 	}
-	//Configuro los componentes que van a ir en el JFrame
+	/**
+	 * Metodo configurar componentes
+	 * Este metodo se encarga de recoger los datos de usuario y añadirlo a la lista
+	 * Ademas de validar que el usuario no este repetido
+	 */
 	private  void configurarComponentes() {
 		//instancio la lista
 		

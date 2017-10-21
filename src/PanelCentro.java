@@ -8,10 +8,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-
+/**
+ * Esta clase crea un panel central para realizar las diversas operaciones del cajero
+ * @author Corin Viracacha y Isaac Gomez
+ */
 public class PanelCentro extends JPanel {
 	static GridBagConstraints contenido;
-//Creo un Jpanel Central donde ubico una imagen alusiva a una tarjeta
+	/**
+	 * Metodo constructor del panel central
+	 */
 	  public PanelCentro() {
 		  
 			Border borde = BorderFactory.createTitledBorder( " " );

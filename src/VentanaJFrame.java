@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.*;
-
+/**
+ * Este clase me genera un JFrame y me adecua el JFrame segun sus componentes
+ * @author Corin Viracacha y Isaac Gomez
+ */
 
 
 public class VentanaJFrame extends JFrame {
@@ -17,7 +20,9 @@ public class VentanaJFrame extends JFrame {
 	static PanelIzquierdo panelBusqueda;
 	static PanelDerecho panelFormulario;
 
-	//Constructor que llama los metodos para configurar, poner los JPanel, y mostrar el JFrame
+	/**
+	 * Contructor de la clase VentanaJFrame aqui se inician los elementos que conforman el JFrame
+	 */
 	VentanaJFrame(){
 		 super("Ventana JFrame Principal");
 		 iniciar();
@@ -26,7 +31,10 @@ public class VentanaJFrame extends JFrame {
 		 pack();
          setLocationRelativeTo( null );
 	}
-	//Metodo que devuelve valores para la configuracion inicial del JFrame 
+	/**
+	 * Metodo de configuracion del JFrame en cuanto a diseño
+	 * @return retorna el JFrame y su diseño
+	 */
 	public VentanaJFrame iniciar(){
 				
 				Dimension dims = new Dimension(750, 700);
@@ -39,7 +47,9 @@ public class VentanaJFrame extends JFrame {
 				return this;
 	}
 	
-	//Metodo que coloca cada JPanel en la ubicacion dada segun su setLayout
+	/**
+	 * Metodo para ubicar los componentes(paneles)
+	 */
 	public void componente() {
 		panelArriba = new PanelArriba( );
         add(panelArriba, BorderLayout.NORTH);

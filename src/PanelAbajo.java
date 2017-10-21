@@ -577,7 +577,7 @@ public static void salir() {
 			etiqueta52.setText("BIENVENIDO");
 			 
 				if(bandera==1) {
-					etiqueta52.setText("BIENVENIDO "+Usuario.lista.get(i).getNombre());
+					etiqueta52.setText("BIENVENIDO "+Usuario.lista.get(cedula).getNombre());
 					VentanaJFrame.panelCentro.removeAll();
 					VentanaJFrame.panelCentro.repaint();
 					VentanaJFrame.panelBusqueda.removeAll();
@@ -1401,13 +1401,8 @@ public static void salir() {
 			}
 			catch(java.lang.NullPointerException a) {
 				
-			}
-			
-		
-
-
-			
 		}
+	}
 		
 		//metodo vacio que hace la operacion de pagos 
 		private static void realizarpagos() {
@@ -1625,7 +1620,7 @@ public static void salir() {
 				}
 			});
 
-			JLabel etiqueta3 = new JLabel("VALOR A TRANSFERIR ");
+			JLabel etiqueta3 = new JLabel("VALOR DEL PAGO: ");
 			etiqueta3.setForeground(Color.BLACK);
 			contenido.fill = GridBagConstraints.HORIZONTAL;	
 			contenido.gridx = 1;
